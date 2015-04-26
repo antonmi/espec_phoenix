@@ -9,6 +9,10 @@ defmodule EspecPhoenix.Mixfile do
      version: @version,
      elixir: "~> 1.0",
      description: description,
+     package: package,
+     deps: deps,
+     source_url: "https://github.com/antonmi/espec_phoenix",
+     preferred_cli_env: [espec: :test],
      deps: deps]
   end
 
@@ -38,7 +42,8 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, ">= 0.0.0"},
-      {:phoenix, ">= 0.0.0"}
+      {:phoenix, ">= 0.0.0"},
+      {:phoenix_ecto, ">= 0.0.0"}
     ]
   end
 

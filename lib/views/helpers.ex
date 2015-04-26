@@ -1,8 +1,5 @@
 defmodule ESpec.Phoenix.Views.Helpers do
 
-	
-
-
 	defmacro __using__(args) do
 	  quote do
 

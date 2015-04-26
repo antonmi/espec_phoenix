@@ -10,9 +10,8 @@ defmodule ESpec.Phoenix do
 					
       		import Ecto.Model
 					import Ecto.Query, only: [from: 2]
-
-
 				end
+	  
 	    Keyword.has_key?(args, :controller) ->
 	    	quote do
  					use ESpec
@@ -25,6 +24,7 @@ defmodule ESpec.Phoenix do
 					use ESpec.Phoenix.Controllers.Helpers
 					import ESpec.Phoenix.Assertions.Helpers
 				end
+			
 			Keyword.has_key?(args, :integration) ->
 	    	quote do
  					use ESpec
@@ -33,6 +33,7 @@ defmodule ESpec.Phoenix do
 					use Phoenix.ConnTest
 					import ESpec.Phoenix.Assertions.Helpers
 				end	
+			
 			Keyword.has_key?(args, :view) ->
 	    	quote do
  					use ESpec
@@ -40,6 +41,7 @@ defmodule ESpec.Phoenix do
 					
 					use ESpec.Phoenix.Views.Helpers
 				end
+			
 			true -> :ok	
 		end
 
