@@ -1,0 +1,5 @@
+%{"espec": {:hex, :espec, "0.5.0"},
+  "meck": {:hex, :meck, "0.8.2"},
+  "phoenix": {:hex, :phoenix, "0.11.0"},
+  "plug": {:hex, :plug, "0.11.3"},
+  "poison": {:hex, :poison, "1.4.0"}}
