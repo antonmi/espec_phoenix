@@ -1,4 +1,3 @@
-EspecPhoenix
+ESpecPhoenix
 ============
-
-**TODO: Add description**
+ESpec helpers and matchers for Phoenix web framework
