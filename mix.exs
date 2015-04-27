@@ -20,7 +20,7 @@ defmodule EspecPhoenix.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :phoenix]]
   end
 
   # Dependencies can be Hex packages:
@@ -41,7 +41,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, ">= 0.0.0"},
+      {:espec, ">= 0.5.0"},
       {:phoenix, ">= 0.0.0"},
       {:phoenix_ecto, ">= 0.0.0"}
     ]

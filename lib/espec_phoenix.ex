@@ -18,17 +18,16 @@ defmodule ESpec.Phoenix do
 					@controller Keyword.get(unquote(args), :controller)
 					
 					use Plug.Test
-
 					import Phoenix.Controller
 
 					use ESpec.Phoenix.Controllers.Helpers
 					import ESpec.Phoenix.Assertions.Helpers
 				end
 			
-			Keyword.has_key?(args, :integration) ->
+			Keyword.has_key?(args, :request) ->
 	    	quote do
  					use ESpec
-					@endpoint Keyword.get(unquote(args), :integration)
+					@endpoint Keyword.get(unquote(args), :request)
 					
 					use Phoenix.ConnTest
 					import ESpec.Phoenix.Assertions.Helpers

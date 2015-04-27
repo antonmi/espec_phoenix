@@ -7,7 +7,10 @@ defmodule ESpec.Phoenix.Controllers.Helpers do
 	  quote do
 
 
-	  	def conn, do: Phoenix.ConnTest.conn()
+	  	def conn do
+	  	 	Phoenix.ConnTest.conn()
+	  	 	|>  put_private(:phoenix_controller, @controller)
+	  	end
 
 
 		  def get(conn, action, params \\ %{}) do
