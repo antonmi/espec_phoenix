@@ -9,6 +9,7 @@ defmodule App.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     preferred_cli_env: [espec: :test],
      deps: deps]
   end
 
@@ -31,6 +32,7 @@ defmodule App.Mixfile do
     [{:phoenix, "~> 0.11"},
      {:phoenix_ecto, "~> 0.3"},
      {:postgrex, ">= 0.0.0"},
+     {:epsec_phoenix, github: "antonmi/espec_phoenix", only: :test, app: false},
      {:phoenix_live_reload, "~> 0.3"},
      {:cowboy, "~> 1.0"}]
   end

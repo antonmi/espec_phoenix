@@ -4,7 +4,8 @@ defmodule App.PostsController do
 	plug :action
 
 	def index(conn, _params) do
-		render conn, "index.html"
+		posts = App.PostsRepo.all
+		render conn, "index.html", posts: posts
 	end
 
 	def hello(conn, params) do

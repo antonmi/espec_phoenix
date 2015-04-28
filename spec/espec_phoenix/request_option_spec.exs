@@ -1,7 +1,7 @@
 Code.require_file("spec/espec_phoenix/requires.ex")
-Code.require_file("spec/app/lib/app/endpoint.ex")
-Code.require_file("spec/app/web/views/error_view.ex")
-Code.require_file("spec/app/config/config.exs")
+Code.require_file("app/lib/app/endpoint.ex")
+Code.require_file("app/web/views/error_view.ex")
+Code.require_file("app/config/config.exs")
 
 defmodule RequestOptionSpec do
 	use ESpec.Phoenix, request: App.Endpoint

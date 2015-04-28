@@ -2,18 +2,18 @@ defmodule ESpec.Phoenix.Assertions.BeSuccessfull do
 
 	use ESpec.Assertions.Interface
 
-  defp match(response, _value) do
-    {response.status >= 200 && response.status < 300, response.status}
+  defp match(conn, _value) do
+    {conn.status >= 200 && conn.status < 300, conn.status}
   end
 
-  defp success_message(response, _value, _result, positive) do
+  defp success_message(conn, _value, _result, positive) do
     be = if positive, do: "is", else: "is not"
-    "`#{inspect response}` #{be} successfull."
+    "`#{inspect conn}` #{be} successfull."
   end  
 
-  defp error_message(response, _value, result, positive) do
+  defp error_message(conn, _value, result, positive) do
     be = if positive, do: "be", else: "not to be"
-    "Expected `#{inspect response}` to #{be} suceessfull, but the status is #{result}."
+    "Expected `#{inspect conn}` to #{be} suceessfull, but the status is #{result}."
   end
 
 end
