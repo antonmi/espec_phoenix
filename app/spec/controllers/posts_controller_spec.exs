@@ -23,14 +23,11 @@ defmodule App.PostsControllerSpec do
 		it do: should have_in_assigns :posts
 		it do: should have_in_assigns(:posts, posts)
 		
-		it do
-			s = subject
-			require IEx; IEx.pry
-		end
+		it do: String.contains?(subject.resp_body, "Post 1") |> should be true
 	end
 
 	describe "create" do
-
+		
 	end
 
 end
