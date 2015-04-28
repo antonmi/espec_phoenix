@@ -22,7 +22,7 @@ defmodule ESpec.Phoenix.Assertions.HaveInAssigns do
 
   defp success_message(conn, [key, value], _result, positive) do
     has = if positive, do: "has", else: "has not"
-    "`#{inspect conn}` #{has} assgins `#{key}` => `#{value}`."
+    "`#{inspect conn}` #{has} assgins `#{key}` => `#{inspect value}`."
   end  
 
   defp error_message(conn, [key], result, positive) do
@@ -39,7 +39,7 @@ defmodule ESpec.Phoenix.Assertions.HaveInAssigns do
 
   defp error_message(conn, [key, value], result, positive) do
   	have = if positive, do: "to have", else: "not to have"
-    "Expected `#{inspect conn}` #{have} `#{key}` => `#{value}` in the assigns, but it has `#{key}` => `#{result}`."
+    "Expected `#{inspect conn}` #{have} `#{key}` => `#{value}` in the assigns, but it has `#{key}` => `#{inspect result}`."
   end
 
 

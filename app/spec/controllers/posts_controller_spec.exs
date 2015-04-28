@@ -15,15 +15,21 @@ defmodule App.PostsControllerSpec do
 			allow(App.PostsRepo).to accept(:all, fn -> posts end)
 		end
 
-		subject do: get(conn, :index)
+		subject do: action :index
 
 		it do: should be_successfull
+		it do: should have_http_status 200
+		
+		it do: should have_in_assigns :posts
+		it do: should have_in_assigns(:posts, posts)
 		
 		it do
-
-			should have_in_assigns :posts
-		 	# require IEx; IEx.pry
+			s = subject
+			require IEx; IEx.pry
 		end
+	end
+
+	describe "create" do
 
 	end
 
