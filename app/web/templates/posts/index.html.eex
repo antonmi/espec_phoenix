@@ -1,10 +1,10 @@
 <h1>Posts</h1>
 
-<ul>
+<ul id="posts-list">
 <%= for post <- @posts do %>
-<li>
-<p><%= post.title %></p>
-<p><%= post.text %></p>
+<li class=".post .li" data-text="text">
+	<p><%= post.title %></p>
+	<p><%= post.text %></p>
 </li>
 <% end %>
 </ul>

@@ -1,3 +1,5 @@
+Code.require_file("spec/espec_phoenix_extend.ex")
+
 ESpec.start
 
 Mix.Task.run "ecto.create", ["--quiet"]
@@ -14,3 +16,7 @@ ESpec.configure fn(config) ->
 		
 	end
 end
+
+
+
+

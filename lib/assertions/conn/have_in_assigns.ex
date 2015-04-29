@@ -1,4 +1,4 @@
-defmodule ESpec.Phoenix.Assertions.HaveInAssigns do
+defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
 
 	use ESpec.Assertions.Interface
 

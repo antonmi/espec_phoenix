@@ -27,7 +27,9 @@ defmodule App.PostsControllerSpec do
 	end
 
 	describe "create" do
-		
+		it do
+			# IO.inspect posts_path(conn, :index)
+		end
 	end
 
 end

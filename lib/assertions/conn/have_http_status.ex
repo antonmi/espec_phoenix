@@ -1,4 +1,4 @@
-defmodule ESpec.Phoenix.Assertions.HaveHttpStatus do
+defmodule ESpec.Phoenix.Assertions.Conn.HaveHttpStatus do
 
 	use ESpec.Assertions.Interface
 

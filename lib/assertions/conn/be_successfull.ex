@@ -1,4 +1,4 @@
-defmodule ESpec.Phoenix.Assertions.BeSuccessfull do
+defmodule ESpec.Phoenix.Assertions.Conn.BeSuccessfull do
 
 	use ESpec.Assertions.Interface
 
