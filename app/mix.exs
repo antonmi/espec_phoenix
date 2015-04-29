@@ -32,7 +32,8 @@ defmodule App.Mixfile do
     [{:phoenix, "~> 0.11"},
      {:phoenix_ecto, "~> 0.3"},
      {:postgrex, ">= 0.0.0"},
-     {:epsec_phoenix, github: "antonmi/espec_phoenix", only: :test, app: false},
+     # {:epsec_phoenix, github: "antonmi/espec_phoenix", only: :test, app: false, tag: "0.0.2"},
+     {:epsec_phoenix, path: "/home/antonmi/elixir/espec_phoenix", only: :test, app: false },
      {:phoenix_live_reload, "~> 0.3"},
      {:cowboy, "~> 1.0"}]
   end
