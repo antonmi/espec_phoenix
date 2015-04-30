@@ -3,7 +3,7 @@
 ##### ESpec helpers and matchers for Phoenix web framework.
 Read about ESpec [here](https://github.com/antonmi/espec).
 
-Tke a lok to examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/master/app/spec).
+There are examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/master/app/spec).
 
 ## Contents
 - [Installation](#installation)
