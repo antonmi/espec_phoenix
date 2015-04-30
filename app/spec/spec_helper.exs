@@ -1,20 +1,15 @@
-Code.require_file("spec/espec_phoenix_extend.ex")
+Code.require_file("spec/phoenix_helper.exs")
 
 ESpec.start
-
-Mix.Task.run "ecto.create", ["--quiet"]
-Mix.Task.run "ecto.migrate", ["--quiet"]
-Ecto.Adapters.SQL.begin_test_transaction(App.Repo)
-
-	
+  
 ESpec.configure fn(config) ->
-	config.before fn ->
-		Ecto.Adapters.SQL.restart_test_transaction(App.Repo, [])
-	end
-	
-	config.finally fn(__) -> 
-		
-	end
+  config.before fn ->
+    Ecto.Adapters.SQL.restart_test_transaction(App.Repo, [])
+  end
+  
+  config.finally fn(__) -> 
+    
+  end
 end
 
 
