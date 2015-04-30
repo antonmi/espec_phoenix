@@ -41,7 +41,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, github: "antonmi/espec"},
+      {:espec, ">= 0.5.1"},
       {:phoenix, ">= 0.0.0"},
       {:phoenix_ecto, ">= 0.0.0"}
     ]
