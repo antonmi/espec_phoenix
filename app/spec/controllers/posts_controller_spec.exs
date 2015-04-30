@@ -32,4 +32,6 @@ defmodule App.PostsControllerSpec do
 		end
 	end
 
+	
+
 end

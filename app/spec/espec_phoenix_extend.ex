@@ -1,17 +1,20 @@
 defmodule ESpec.Phoenix.Extend do
-	
-	def model do
+  
+  def model do
+    quote do
+      alias App.Repo
+      alias App.Post
+    end
+  end
 
-	end
-
-	def controller do
+  def controller do
     quote do
       alias App.Repo
       import App.Router.Helpers
     end
   end
 
- 	def request do
+  def request do
     quote do
       alias App.Repo
       alias App.Post
@@ -19,12 +22,21 @@ defmodule ESpec.Phoenix.Extend do
     end
   end
 
-  def view do
+  def router do
+    quote do
+      
+    end
+  end
 
+  def view do
+    quote do
+      alias App.PostsView
+      import App.Router.Helpers
+    end
   end
 
 
-	defmacro __using__(which) when is_atom(which) do
+  defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
 

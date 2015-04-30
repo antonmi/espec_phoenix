@@ -10,9 +10,10 @@ defmodule App.PostsRequestsSpec do
 			{:ok, post1: post1, post2: post2}
 		end
 
-		subject! do: get(conn(),  App.Router.Helpers.posts_path(conn(), :index))
+		subject! do: get(conn(), posts_path(conn(), :index))
 
 		it do: should be_successfull
+		it do: should be_success
 
 		context "check body" do
 			let :html, do: subject.resp_body
@@ -20,14 +21,9 @@ defmodule App.PostsRequestsSpec do
 			it do: html |> should have_content "Post1"
 			it do: html |> should have_text "Post2"
 		end
-
-		it do
-			IO.inspect subject.private[:phoenix_flash]
-		end
 	end
 
 	describe "create" do
-		# let :params, do: %{"_csrf_token" => "vu/sjSqDJPtmuii+fVJQwINiR2XPhurxKjEKjLas+xA=", "_method" => "post", "format" => "html", "text" => "xcxxxxcxcxc", "title" => "dsfgsdfgsdfg"}
 		let :params, do: %{"text" => "some text", "title" => "some post"}
 
 		context "success" do
@@ -48,22 +44,33 @@ defmodule App.PostsRequestsSpec do
 				end
 			end
 
-			context "chack conn" do
-				let! :con, do: post(conn(), posts_path(conn(), :index), params)
+			context "check conn" do
+				subject! do: post(conn(), posts_path(conn(), :index), params)
 				
-				it do
-					# require IEx; IEx.pry
-					# IO.inspect con.private[:phoenix_flash]
-				end
+				it do: should be_redirection
+				it do: should be_redirect
 
-				it do: con |> should have_in_flash "notice"
-				it do: con |> should have_in_flash("notice", "Post created!")
+				it do: should have_in_flash "notice"
+				it do: should have_in_flash("notice", "Post created!")
 
+				it do: should redirect_to(posts_path(conn(), :index))
 			end
 		end
 
 
+	end
 
+	describe "not found" do
+		subject! do: get(conn(), "/not_found")
+		it do: should be_not_found
+		it do: should be_missing
+	end
+
+	describe "error" do
+		subject! do: get(conn(), "/error")
+		it do: should be_error
+		it do: should be_server_error
 	end
 
 end
+

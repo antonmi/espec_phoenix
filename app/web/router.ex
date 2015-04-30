@@ -18,6 +18,7 @@ defmodule App.Router do
     get "/", PageController, :index
     resources "/posts", PostsController
     get "hello", PostsController, :hello 
+    get "error", PostsController, :error 
   end
 
   # Other scopes may use custom stacks.

@@ -1,18 +1,18 @@
 defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
 
-	use ESpec.Assertions.Interface
+  use ESpec.Assertions.Interface
 
-	defp match(conn, [key]) do
-  	result = Map.has_key?(conn.assigns, key)
+  defp match(conn, [key]) do
+    result = Map.has_key?(conn.assigns, key)
     {result, result}
   end
 
   defp match(conn, [key, value]) do
-  	if Map.has_key?(conn.assigns, key) do
-  		{conn.assigns[key] == value, conn.assigns[key]}
-  	else
-    	{false, false}
-  	end
+    if Map.has_key?(conn.assigns, key) do
+      {conn.assigns[key] == value, conn.assigns[key]}
+    else
+      {false, false}
+    end
   end
 
   defp success_message(conn, [key], _result, positive) do
@@ -38,7 +38,7 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
   end
 
   defp error_message(conn, [key, value], result, positive) do
-  	have = if positive, do: "to have", else: "not to have"
+    have = if positive, do: "to have", else: "not to have"
     "Expected `#{inspect conn}` #{have} `#{key}` => `#{value}` in the assigns, but it has `#{key}` => `#{inspect result}`."
   end
 

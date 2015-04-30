@@ -1,6 +1,6 @@
 defmodule ESpec.Phoenix.Assertions.Conn.HaveHttpStatus do
 
-	use ESpec.Assertions.Interface
+  use ESpec.Assertions.Interface
 
   defp match(conn, value) do
     {conn.status == value, conn.status}
