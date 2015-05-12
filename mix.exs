@@ -41,7 +41,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, ">= 0.5.1"},
+      {:espec, ">= 0.6.0"},
       {:phoenix, ">= 0.0.0"},
       {:phoenix_ecto, ">= 0.0.0"}
     ]
