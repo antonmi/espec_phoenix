@@ -18,7 +18,8 @@ defmodule App.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {App, []},
-     applications: [:phoenix, :cowboy, :logger, :ecto]]
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment
@@ -29,12 +30,12 @@ defmodule App.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.11"},
-     {:phoenix_ecto, "~> 0.3"},
+    [{:phoenix, "~> 0.13"},
+     {:phoenix_ecto, "~> 0.4"},
      {:postgrex, ">= 0.0.0"},
-     # {:epsec_phoenix, github: "antonmi/espec_phoenix", only: :test, app: false, tag: "0.0.2"},
-     {:epsec_phoenix, path: "/home/antonmi/elixir/espec_phoenix", only: :test, app: false },
-     {:phoenix_live_reload, "~> 0.3"},
+     {:phoenix_html, "~> 1.0"},
+     {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:espec_phoenix, path: "/home/antonmi/elixir/espec_phoenix", only: :test, app: false},
      {:cowboy, "~> 1.0"}]
   end
 end

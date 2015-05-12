@@ -8,8 +8,8 @@ use Mix.Config
 # Configures the endpoint
 config :app, App.Endpoint,
   url: [host: "localhost"],
-  root: Path.expand("..", __DIR__),
-  secret_key_base: "NqxXSCfM4KKnyp/9Q3FSCwD0o3qge9iwiPnK0ckFGLEzdgh9f0yUINoFuxwcuNhu",
+  root: Path.dirname(__DIR__),
+  secret_key_base: "/CuAICqBmgNuYNTOtGG/uQm+50VJ9boJsQkgRIi8FhPn7DpNRUjyoEeW6kJNoYL+",
   debug_errors: false,
   pubsub: [name: App.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -22,4 +22,3 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-

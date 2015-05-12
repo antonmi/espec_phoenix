@@ -5,7 +5,7 @@ defmodule ESpec.Phoenix.Assertions.Conn.RedirectTo do
   defp match(conn, location) do
     if conn.status >= 300 && conn.status < 400 do
       {_, l} = conn.resp_headers 
-      |> Enum.find(fn({key, _val}) -> key == "Location" end)
+      |> Enum.find(fn({key, _val}) -> key == "location" end)
       {l == location, {:redirection, l}}
     else
       {false, {:not_redirection, conn.status}}
@@ -23,8 +23,8 @@ defmodule ESpec.Phoenix.Assertions.Conn.RedirectTo do
   end
 
   defp error_message(conn, location, {:redirection, result}, positive) do
-   redirect = if positive, do: "redirect", else: "not to redirect"
-   "Expected `#{inspect conn}` to #{redirect} to `#{location}`, but it redirects to `#{result}`."
+    redirect = if positive, do: "redirect", else: "not to redirect"
+    "Expected `#{inspect conn}` to #{redirect} to `#{location}`, but it redirects to `#{result}`."
   end
 
 end

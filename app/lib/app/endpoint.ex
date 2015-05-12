@@ -1,9 +1,12 @@
 defmodule App.Endpoint do
   use Phoenix.Endpoint, otp_app: :app
 
-  # Serve at "/" the given assets from "priv/static" directory
+  # Serve at "/" the static files from "priv/static" directory.
+  #
+  # You should set gzip to true if you are running phoenix.digest
+  # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :app,
+    at: "/", from: :app, gzip: false,
     only: ~w(css images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -26,8 +29,7 @@ defmodule App.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_app_key",
-    signing_salt: "4EBMYrP3",
-    encryption_salt: "18hjAgss"
+    signing_salt: "x/Dk+1b5"
 
   plug :router, App.Router
 end

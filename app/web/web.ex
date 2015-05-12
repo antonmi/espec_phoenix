@@ -41,13 +41,19 @@ defmodule App.Web do
       use Phoenix.View, root: "web/templates"
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2]
+      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
       # Import URL helpers from the router
       import App.Router.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
+    end
+  end
+
+  def router do
+    quote do
+      use Phoenix.Router
     end
   end
 
