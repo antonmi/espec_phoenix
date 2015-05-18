@@ -28,7 +28,7 @@ Set `preferred_cli_env` for `espec` in the `mix.exs` file:
 ```elixir
 def project do
   ...
-  preferred_cli_env: [espec: :test]
+  preferred_cli_env: [espec: :test],
   ...
 end
 ```
@@ -43,7 +43,10 @@ MIX_ENV=test mix espec_phoenix.init
 ```
 The task creates `phoenix_helper.exs`, `espec_phoenix_extend.ex`, and basic specs folders and places simple examples there.
 
-`phoenix_helper.exs` has Phoenix related configurations. You must require this helper in your `spec_helper.exs`
+`phoenix_helper.exs` has Phoenix related configurations.
+Replace `App.Repo` with your repo module.
+
+You must require this helper in your `spec_helper.exs`.
 Also you need restart `Ecto` transaction before each example. So `spec_helper.exs` should look like:
 ```elixir
 #require phoenix_helper.exs
@@ -54,7 +57,7 @@ ESpec.start
 ESpec.configure fn(config) ->
   config.before fn ->
     #restart transactions
-    Ecto.Adapters.SQL.restart_test_transaction(App.Repo, [])
+    Ecto.Adapters.SQL.restart_test_transaction(YourApplication.Repo, [])
   end
   
   config.finally fn(__) -> 
@@ -65,6 +68,17 @@ end
 The `espec_phoenix_extend.ex` file contains `ESpec.Phoenix.Extend` module.
 Use this module to import or alias additional modules to your specs.
 
+
+## Model specs
+#### Changeset
+```elixir
+
+expect(changeset).to be_valid
+... have_errors(:name)
+... have_errors([:name, :surname])
+... have_errors([name: "can't be blank", surname: "can't be blank"])
+
+```
 
 
 
