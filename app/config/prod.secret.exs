@@ -4,7 +4,7 @@ use Mix.Config
 # you likely want to automate and keep it away from
 # your version control system.
 config :app, App.Endpoint,
-  secret_key_base: "xJrLO0ZIBJ3ZV0JzK8cRmxuxu+se9PS1GSrrz76hMRmMhnalnaPkA5hTl4p00V0d"
+  secret_key_base: "2ipP8UjBSTs5Jx/ZO4Vd7VHk92JObs4CFmqlkhyIm/BJhquxN4B62S7WIt9JQnjA"
 
 # Configure your database
 config :app, App.Repo,

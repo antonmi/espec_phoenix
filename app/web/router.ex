@@ -16,14 +16,11 @@ defmodule App.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/posts", PostsController
-    get "hello", PostsController, :hello 
-    get "error", PostsController, :error 
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", App do
-    pipe_through :api
-    resources "/posts", Api.PostsController
-  end
+  # scope "/api", App do
+  #   pipe_through :api
+  # end
 end

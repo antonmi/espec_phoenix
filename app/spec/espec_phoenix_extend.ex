@@ -1,9 +1,10 @@
 defmodule ESpec.Phoenix.Extend do
-  
+
   def model do
     quote do
       alias App.Repo
-      alias App.Post
+      import Ecto.Model
+      import Ecto.Query, only: [from: 2]
     end
   end
 
@@ -17,7 +18,6 @@ defmodule ESpec.Phoenix.Extend do
   def request do
     quote do
       alias App.Repo
-      alias App.Post
       import App.Router.Helpers
     end
   end
@@ -30,7 +30,6 @@ defmodule ESpec.Phoenix.Extend do
 
   def view do
     quote do
-      alias App.PostsView
       import App.Router.Helpers
     end
   end
@@ -39,6 +38,4 @@ defmodule ESpec.Phoenix.Extend do
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
-
-
 end

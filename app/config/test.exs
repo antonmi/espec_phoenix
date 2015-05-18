@@ -15,5 +15,4 @@ config :app, App.Repo,
   username: "postgres",
   password: "123456",
   database: "app_test",
-  size: 1,
-  max_overflow: false
+  size: 1 # Use a single connection for transactional tests
