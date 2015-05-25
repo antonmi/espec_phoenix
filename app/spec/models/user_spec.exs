@@ -22,4 +22,8 @@ defmodule App.UserSpec do
     it do: should have_errors([name: "can't be blank", age: "can't be blank"])
   end
 
+  
+
+
+
 end
