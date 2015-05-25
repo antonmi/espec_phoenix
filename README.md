@@ -68,16 +68,38 @@ end
 The `espec_phoenix_extend.ex` file contains `ESpec.Phoenix.Extend` module.
 Use this module to import or alias additional modules to your specs.
 
-
 ## Model specs
-#### Changeset
+### Example
 ```elixir
+defmodule App.UserSpec do
+  use ESpec.Phoenix, model: App.User
+  alias App.User
 
+  let :valid_attrs, do: %{age: 42, name: "some content"}
+  let :invalid_attrs, do: %{}
+
+  context "valid changeset" do
+    subject do: User.changeset(%User{}, valid_attrs)
+    it do: should be_valid
+  end
+end  
+```
+#### Changeset helpers
+```elixir
 expect(changeset).to be_valid
 ... have_errors(:name)
 ... have_errors([:name, :surname])
 ... have_errors([name: "can't be blank", surname: "can't be blank"])
 
+```
+
+## Controller specs
+### Example
+```elixir
+defmodule App.UserControllerSpec do
+   use ESpec.Phoenix, controller: App.UserController
+
+end
 ```
 
 
