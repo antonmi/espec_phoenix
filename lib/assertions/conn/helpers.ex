@@ -13,10 +13,9 @@ defmodule ESpec.Phoenix.Assertions.Helpers do
 
   def redirect_to(value), do: { ESpec.Phoenix.Assertions.Conn.RedirectTo, value}
 
-  def have_in_assigns(key), do: {ESpec.Phoenix.Assertions.Conn.HaveInAssigns, [key]}
-  def have_in_assigns(key, value), do: {ESpec.Phoenix.Assertions.Conn.HaveInAssigns, [key, value]}
-  
-  def have_in_flash(key), do: {ESpec.Phoenix.Assertions.Conn.HaveInFlash, [key]}
-  def have_in_flash(key, value), do: {ESpec.Phoenix.Assertions.Conn.HaveInFlash, [key, value]}
+  def have_in_assigns(value), do: {ESpec.Phoenix.Assertions.Conn.HaveInAssigns, value}
+  def have_in_flash(value), do: {ESpec.Phoenix.Assertions.Conn.HaveInFlash, value}
 
+  def render_template(value), do: {ESpec.Phoenix.Assertions.Conn.RenderTemplate, value}
+  def use_view(value), do: {ESpec.Phoenix.Assertions.Conn.UseView, value}
 end

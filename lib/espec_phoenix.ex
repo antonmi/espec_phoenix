@@ -21,7 +21,6 @@ defmodule ESpec.Phoenix do
 					use ESpec
 					@controller Keyword.get(unquote(args), :controller)
 					
-					import Phoenix.Controller
 					use Phoenix.ConnTest
 
 					use ESpec.Phoenix.Controllers.Helpers

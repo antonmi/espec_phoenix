@@ -17,7 +17,6 @@ defmodule ESpec.Phoenix.Assertions.Changeset.HaveErrors do
     {result, result}
   end
 
-
   defp success_message(changeset, value, _result, positive) do
     has = if positive, do: "has", else: "has not"
     "`#{inspect changeset}` #{has} errors `#{inspect value}`."

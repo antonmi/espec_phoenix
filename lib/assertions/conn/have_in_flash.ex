@@ -2,46 +2,33 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveInFlash do
 
   use ESpec.Assertions.Interface
 
-	defp match(conn, [key]) do
-    result = Map.has_key?(flash(conn), key)
+  defp match(conn, list) when is_list list do
+    if Keyword.keyword?(list) do
+      list = Enum.map(list, fn{k, v} -> {"#{k}", v} end)
+      result = Enum.all?(list, &Enum.member?(flash(conn), &1))
+    else
+      keys = Map.keys(flash(conn))
+      result = Enum.all?(list, &Enum.member?(keys, "#{&1}"))
+    end
     {result, result}
   end
 
-  defp match(conn, [key, value]) do
-    if Map.has_key?(flash(conn), key) do
-      {flash(conn)[key] == value, flash(conn)[key]}
-    else
-      {false, false}
-    end
+  defp match(conn, value) do
+    result = Enum.member?(Map.keys(flash(conn)), "#{value}")
+    {result, result}
   end
 
   defp flash(conn), do: conn.private[:phoenix_flash]
 
-  defp success_message(conn, [key], _result, positive) do
+  defp success_message(conn, value, _result, positive) do
     has = if positive, do: "has", else: "has not"
-    "`#{inspect conn}` #{has} `#{key}` in the flash."
+    "`#{inspect conn}` #{has} flash `#{inspect value}`."
   end  
 
-  defp success_message(conn, [key, value], _result, positive) do
-    has = if positive, do: "has", else: "has not"
-    "`#{inspect conn}` #{has} flash `#{key}` => `#{inspect value}`."
-  end  
-
-  defp error_message(conn, [key], result, positive) do
-    have = if positive, do: "to have", else: "not to have"
-    but = if positive, do: "hasn't", else: "has"
-    "Expected `#{inspect conn}` #{have} `#{key}` in the flash, but #{but}."
-  end
-
-  defp error_message(conn, [key, value], false, positive) do
-    have = if positive, do: "to have", else: "not to have"
-    but = if positive, do: "hasn't the key", else: "has the key"
-    "Expected `#{inspect conn}` #{have} `#{key}` => `#{value}` in the flash, but #{but}."
-  end
-
-  defp error_message(conn, [key, value], result, positive) do
-    have = if positive, do: "to have", else: "not to have"
-    "Expected `#{inspect conn}` #{have} `#{key}` => `#{value}` in the flash, but it has `#{key}` => `#{inspect result}`."
+  defp error_message(conn, value, _result, positive) do
+    have = if positive, do: "have", else: "not to have"
+    but = if positive, do: "it has not", else: "it has"
+    "Expected `#{inspect conn}` to #{have} flash `#{inspect value}`, but #{but}."
   end
 
 end
