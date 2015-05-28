@@ -109,7 +109,7 @@ expect(res_conn).to be_successfull  #or be_success
 ... be_redirection                  #be_redirect
 ... be_not_found                    #be_missing
 ... be_server_error                 #be_error
-#just
+#or just
 ... have_http_status(code)
 ```
 ##### Check assigns
