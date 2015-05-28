@@ -89,7 +89,7 @@ end
 expect(changeset).to be_valid
 ... have_errors(:name)
 ... have_errors([:name, :surname])
-... have_errors([name: "can't be blank", surname: "can't be blank"])
+... have_errors(name: "can't be blank", surname: "can't be blank")
 
 ```
 
@@ -102,6 +102,33 @@ defmodule App.UserControllerSpec do
 end
 ```
 
+#### Conn helpers
+##### Check status
+```elixir
+expect(res_conn).to be_successfull  #or be_success
+... be_redirection                  #be_redirect
+... be_not_found                    #be_missing
+... be_server_error                 #be_error
+
+... have_http_status(code)
+... redirect_to(user_path(conn, :index))
+```
+##### Check template and view
+```elixir
+expect(res_conn).to render_template("index.html")
+... use_view(App.UserView)
+```
+##### Check assigns
+```elixir
+expect(res_conn).to have_in_assigns(:users)
+... have_in_assigns([:users, :options])
+... have_in_assigns(users: users, options: options)
+```
+##### Check flash
+```elixir
+expect(res_conn).to have_in_flash(:info)
+... have_in_flash(info: "User created successfully.")
+```
 
 
 
