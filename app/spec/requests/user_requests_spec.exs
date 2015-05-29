@@ -28,9 +28,28 @@ defmodule App.UserRequestsSpec do
 
       it do: IO.inspect response
 
+      it "checks inputs" do
+        expect(body).to have_selector("input #user_name")
+        expect(body).to have_selector("input #user_age")
+      end
+
+      it "check text in labels" do
+        expect(body).to have_text_in("label", "Name")
+        expect(body).to have_content_in("label", "Age")
+      end
+
+      it "check form" do
+        expect(body).to have_attributes_in("form", [:action, :method])
+        expect(body).to have_attributes_in("form", action: "/users")
+        expect(body).to have_attributes_in("form", action: "/users", method: "post")
+      end
+
       it do
+        html = App.UserRequestsSpec.body
         require IEx; IEx.pry
       end
+
+
     end 
   end
 
