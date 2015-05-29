@@ -2,7 +2,7 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
 
   use ESpec.Assertions.Interface
 
-  defp match(conn, list) when is_list list do
+  defp match(conn, list) when is_list(list) do
     if Keyword.keyword?(list) do
       result = Enum.all?(list, &Enum.member?(conn.assigns, &1))
     else
