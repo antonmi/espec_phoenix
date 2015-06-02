@@ -141,7 +141,7 @@ expect("<p>some text</p>").to have_text("some text")
 ```
 #### Check presence of some selector
 ```elixir
-expect(res_conn).to have_text("input #user_name")   #Floki.find(res_conn.resp_body, "input #user_name")
+expect(res_conn).to have_selector("input #user_name")   #Floki.find(res_conn.resp_body, "input #user_name")
 ```
 
 #### Check text in the selector
