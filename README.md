@@ -129,6 +129,30 @@ expect(res_conn).to have_in_assigns(:users)
 expect(res_conn).to have_in_flash(:info)
 ... have_in_flash(info: "User created successfully.")
 ```
+## View specs
+ESpec.Phoenix uses [Floki](https://github.com/philss/floki) to parse html.
+There are some mathers for html string or for `conn` structure:
+##### Check presence of plain text
+```elixir
+expect(res_conn).to have_text("some text")    #String.contains?(res_conn.resp_body, "some text")
+... have_content("some text")
+#or check html string directly
+expect("<p>some text</p>").to have_text("some text")
+```
+#### Check presence of some selector
+```elixir
+expect(res_conn).to have_text("input #user_name")   #Floki.find(res_conn.resp_body, "input #user_name")
+```
+
+#### Check text in the selector
+```elixir
+expect(res_conn).to have_text_in("label", "Name")
+```
+#### Check attributes in the selector
+```elixir
+have_attributes_in("form", action: "/users", method: "post")
+```
+
 
 
 
