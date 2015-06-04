@@ -97,8 +97,25 @@ expect(changeset).to be_valid
 ### Example
 ```elixir
 defmodule App.UserControllerSpec do
-   use ESpec.Phoenix, controller: App.UserController
+  use ESpec.Phoenix, controller: App.UserController
+  alias App.User
+  
+  describe "show" do
+    let :user, do: %User{id: 1, age: 25, name: "Jim"} 
 
+    before do
+      allow(Repo).to accept(:get, fn
+        User, 1 -> user
+        User, id -> passthrough([id])
+      end)
+    end
+
+    subject do: action(:show, %{"id" => 1})
+    
+    it do: should be_successfull
+    it do: should render_template("show.html")
+    it do: should have_in_assigns(user: user)
+  end
 end
 ```
 
@@ -130,27 +147,43 @@ expect(res_conn).to have_in_flash(:info)
 ... have_in_flash(info: "User created successfully.")
 ```
 ## View specs
+### Example
+There is a `render/2` helper function available in the view specs.
+```elixir
+defmodule App.UserViewsSpec do
+  use ESpec.Phoenix, view: App.UserView
+  alias App.User
+  
+  describe "show" do
+    let :user, do: %User{id: 1, age: 25, name: "Jim"}
+    subject do: render("show.html", user: user)
+   
+    it do: should have_text("Show user")
+    it do: should have_text_in("ul li", user.name)
+    it do: should have_text_in("ul li", user.age)
+    it do: should have_attribute_in("a", href: user_path(conn, :index))
+  end
+end
+```
 ESpec.Phoenix uses [Floki](https://github.com/philss/floki) to parse html.
 There are some mathers for html string or for `conn` structure:
 ##### Check presence of plain text
 ```elixir
-expect(res_conn).to have_text("some text")    #String.contains?(res_conn.resp_body, "some text")
+expect(html).to have_text("some text")    #String.contains?(html, "some text")
 ... have_content("some text")
-#or check html string directly
-expect("<p>some text</p>").to have_text("some text")
 ```
 #### Check presence of some selector
 ```elixir
-expect(res_conn).to have_selector("input #user_name")   #Floki.find(res_conn.resp_body, "input #user_name")
+expect(html).to have_selector("input #user_name")   #Floki.find(html, "input #user_name")
 ```
 
 #### Check text in the selector
 ```elixir
-expect(res_conn).to have_text_in("label", "Name")
+expect(html).to have_text_in("label", "Name")
 ```
 #### Check attributes in the selector
 ```elixir
-have_attributes_in("form", action: "/users", method: "post")
+expect(html).to have_attributes_in("form", action: "/users", method: "post")
 ```
 
 
