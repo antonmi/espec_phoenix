@@ -1,7 +1,7 @@
 defmodule EspecPhoenix.Mixfile do
   use Mix.Project
 
-  @version "0.1.1"
+  @version "0.1.2"
 
   def project do
     [app: :espec_phoenix,
@@ -42,7 +42,7 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, "0.6.3"},
-      {:phoenix, ">= 0.13.0"},
+      {:phoenix, ">= 0.0.0"},
       {:floki, "~> 0.2"}
     ]
   end
