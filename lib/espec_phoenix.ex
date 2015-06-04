@@ -38,6 +38,9 @@ defmodule ESpec.Phoenix do
 					use Phoenix.ConnTest
 					import ESpec.Phoenix.Assertions.Helpers
 
+					import Ecto.Model
+					import Ecto.Query, only: [from: 2]
+
 					use ESpec.Phoenix.Extend, :request
 				end	
 			

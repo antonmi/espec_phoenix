@@ -3,7 +3,7 @@ defmodule ESpec.Phoenix.Assertions.Conn.RenderTemplate do
   use ESpec.Assertions.Interface
 
   defp match(conn, template) do
-    {conn.private[:phoenix_template] == template, template}
+    {conn.private[:phoenix_template] == template, conn.private[:phoenix_template]}
   end
 
   defp success_message(conn, template, _result, positive) do

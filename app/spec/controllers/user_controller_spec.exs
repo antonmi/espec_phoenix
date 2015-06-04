@@ -18,7 +18,7 @@ defmodule App.UserControllerSpec do
     before do
       allow(Repo).to accept(:all, fn
         User -> users 
-        any -> :meck.passthrough([any])
+        any -> passthrough([any])
       end)
     end
 
@@ -70,7 +70,7 @@ defmodule App.UserControllerSpec do
     before do
       allow(Repo).to accept(:get, fn
         User, 1 -> user
-        User, id -> :meck.passthrough([id])
+        User, id -> passthrough([id])
       end)
     end
 

@@ -7,7 +7,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveTextIn do
   defp match(html, [selector, text]) do
     selector_text = get_selector_text(html, selector)
     if selector_text do
-      result = String.contains?(selector_text, text)
+      result = String.contains?(selector_text, "#{text}")
       {result, selector_text}
     else
       {false, :no_selector}

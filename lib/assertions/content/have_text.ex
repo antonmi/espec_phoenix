@@ -5,7 +5,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveText do
   defp match(%Plug.Conn{resp_body: html}, val), do: match(html, val)
 
   defp match(html, val) do
-    result = String.contains?(html, val) 
+    result = String.contains?(html, "#{val}") 
     {result, result}
   end
   
