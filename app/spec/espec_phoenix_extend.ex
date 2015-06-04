@@ -3,8 +3,6 @@ defmodule ESpec.Phoenix.Extend do
   def model do
     quote do
       alias App.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
     end
   end
 
