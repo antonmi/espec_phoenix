@@ -5,6 +5,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveTextIn do
   defp match(%Plug.Conn{resp_body: html}, [selector, text]), do: match(html, [selector, text])
 
   defp match(html, [selector, text]) do
+    html = "<floki>#{html}</floki>"
     selector_text = get_selector_text(html, selector)
     if selector_text do
       result = String.contains?(selector_text, "#{text}")

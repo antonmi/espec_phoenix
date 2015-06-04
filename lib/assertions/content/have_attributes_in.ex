@@ -5,6 +5,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
   defp match(%Plug.Conn{resp_body: html}, [selector, list]), do: match(html, [selector, list])
 
   defp match(html, [selector, list]) when is_list list do
+    html = "<floki>#{html}</floki>"
     el = find_element(html, selector)
     if el do
       if Keyword.keyword?(list) do
