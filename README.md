@@ -94,6 +94,7 @@ expect(changeset).to be_valid
 ```
 
 ## Controller specs
+There is the `action/2` helper function wich call controller functions directy.
 ### Example
 ```elixir
 defmodule App.UserControllerSpec do
@@ -147,8 +148,8 @@ expect(res_conn).to have_in_flash(:info)
 ... have_in_flash(info: "User created successfully.")
 ```
 ## View specs
+There is the `render/2` helper function available in the view specs.
 ### Example
-There is a `render/2` helper function available in the view specs.
 ```elixir
 defmodule App.UserViewsSpec do
   use ESpec.Phoenix, view: App.UserView
@@ -166,27 +167,53 @@ defmodule App.UserViewsSpec do
 end
 ```
 ESpec.Phoenix uses [Floki](https://github.com/philss/floki) to parse html.
-There are some mathers for html string or for `conn` structure:
+There are some mathers for html string or for `conn` structure.
+#### Content helpers
 ##### Check presence of plain text
 ```elixir
 expect(html).to have_text("some text")    #String.contains?(html, "some text")
 ... have_content("some text")
 ```
-#### Check presence of some selector
+##### Check presence of some selector
 ```elixir
 expect(html).to have_selector("input #user_name")   #Floki.find(html, "input #user_name")
 ```
 
-#### Check text in the selector
+##### Check text in the selector
 ```elixir
 expect(html).to have_text_in("label", "Name")
 ```
-#### Check attributes in the selector
+##### Check attributes in the selector
 ```elixir
 expect(html).to have_attributes_in("form", action: "/users", method: "post")
 ```
+## Requests specs
+Requests specs tests request/response cycles from end to end using a black box approach.
+Functions for corresponding http methods are imported from `Phoenix.ConnTest`.
+Both 'Conn helpers' and 'Content helpers' available.
+### Example
+```elixir
+defmodule App.UserRequestsSpec do
+  use ESpec.Phoenix, request: App.Endpoint
+  alias App.User
+  
+  describe "list user" do
+    before do
+      user1 = %User{name: "Bill", age: 25} |> Repo.insert
+      user2 = %User{name: "Jonh", age: 26} |> Repo.insert
+      {:ok, user1: user1, user2: user2}
+    end
 
+    subject! do: get(conn(), user_path(conn(), :index))
 
+    it do: should be_successfull
 
+    it "checks content" do
+      should have_content __.user1.name
+      should have_content __.user2.name
+    end
+  end
+end  
+```
 
 
