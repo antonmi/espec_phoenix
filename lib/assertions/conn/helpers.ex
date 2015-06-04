@@ -1,4 +1,4 @@
-defmodule ESpec.Phoenix.Assertions.Helpers do
+defmodule ESpec.Phoenix.Assertions.Conn.Helpers do
 
   def have_http_status(value), do: {ESpec.Phoenix.Assertions.Conn.HaveHttpStatus, value}
  

@@ -11,7 +11,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
       if Keyword.keyword?(list) do
         list = Enum.map(list, fn{k, v} -> {"#{k}", v} end)
         result = Enum.all?(list, fn{attr, value} ->
-          Enum.member?(Floki.attribute(el, "#{attr}"), value)
+          Enum.member?(Floki.attribute(el, "#{attr}"), "#{value}")
         end)
       else
         result = Enum.all?(list, fn(attr) ->

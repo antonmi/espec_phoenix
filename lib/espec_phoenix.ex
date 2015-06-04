@@ -24,7 +24,7 @@ defmodule ESpec.Phoenix do
 					use Phoenix.ConnTest
 
 					use ESpec.Phoenix.Controllers.Helpers
-					import ESpec.Phoenix.Assertions.Helpers
+					import ESpec.Phoenix.Assertions.Conn.Helpers
 
 					use ESpec.Phoenix.Extend, :controller
 				end
@@ -36,7 +36,7 @@ defmodule ESpec.Phoenix do
 					
 					import ESpec.Phoenix.Assertions.Content.Helpers
 					use Phoenix.ConnTest
-					import ESpec.Phoenix.Assertions.Helpers
+					import ESpec.Phoenix.Assertions.Conn.Helpers
 
 					import Ecto.Model
 					import Ecto.Query, only: [from: 2]
