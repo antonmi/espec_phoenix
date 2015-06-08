@@ -5,7 +5,6 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveSelector do
   defp match(%Plug.Conn{resp_body: html}, selector), do: match(html, selector)
 
   defp match(html, selector) do
-    html = "<floki>#{html}</floki>"
     el = Floki.find(html, selector)
     case el do
       tuple when is_tuple(tuple)-> {true, tuple}
