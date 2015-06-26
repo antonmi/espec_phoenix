@@ -5,7 +5,7 @@ Read about ESpec [here](https://github.com/antonmi/espec).
 
 There are examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/master/app/spec).
 
-Read the Paulo A Pereira [article](https://onfido.com/blog/elixir-bdd/).
+Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 
 ## Contents
 - [Installation](#installation)
