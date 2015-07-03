@@ -12,7 +12,7 @@ Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 - [Model specs](#model-specs)
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
-- [Requests specs](#requets-specs)
+- [Requests specs](#requests-specs)
 
 ## Installation
 
