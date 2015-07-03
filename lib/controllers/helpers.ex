@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Controllers.Helpers do
-
 	defmacro __using__(args) do
 		quote do
 			use Plug.Test
@@ -28,7 +27,5 @@ defmodule ESpec.Phoenix.Controllers.Helpers do
 				|> Plug.Conn.fetch_session()
 			end
 		end
-	end
-
-
+	 end
 end
