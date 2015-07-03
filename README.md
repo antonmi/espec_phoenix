@@ -13,6 +13,7 @@ Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
 - [Requests specs](#requets-specs)
+
 ## Installation
 
 Add `espec_phoenix` to dependencies in the `mix.exs` file:
