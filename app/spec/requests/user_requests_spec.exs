@@ -21,6 +21,10 @@ defmodule App.UserRequestsSpec do
       should have_content __.user1.name
       should have_content __.user2.name
     end
+
+    it "check custom_plug assigns" do
+      subject |> should have_in_assigns(hello: "world")
+    end
   end
 
   describe "create user" do

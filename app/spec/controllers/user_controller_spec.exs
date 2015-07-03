@@ -34,6 +34,14 @@ defmodule App.UserControllerSpec do
       it do: should have_in_assigns(:users)
       it do: should have_in_assigns(users: users)
     end
+
+    context "set custom conn to test with plugs" do
+      let :custom_conn, do: App.UserController.custom_plug(conn())
+      subject do: action(:index, %{}, custom_conn)
+      it "check custom_plug assigns" do
+        subject |> should have_in_assigns(hello: "world")
+      end
+    end
   end
 
   describe "new" do

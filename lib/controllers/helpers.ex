@@ -4,8 +4,8 @@ defmodule ESpec.Phoenix.Controllers.Helpers do
 		quote do
 			use Plug.Test
 
-			def action(action, params \\ %{}) do
-				conn = 	conn()
+			def action(action, params \\ %{}, connection \\ conn()) do
+				conn = connection
 				|> put_private(:phoenix_controller, @controller)
 				|> Phoenix.Controller.put_view(Phoenix.Controller.__view__(@controller))
 				|> with_session

@@ -4,7 +4,9 @@ defmodule App.UserController do
   alias App.User
 
   plug :scrub_params, "user" when action in [:create, :update]
+  plug :custom_plug when action in [:index]
   plug :action
+  
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -64,4 +66,9 @@ defmodule App.UserController do
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
+
+  def custom_plug(conn, _ \\ %{}) do
+    assign(conn, :hello, "world")
+  end
+
 end
