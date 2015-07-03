@@ -1,7 +1,7 @@
 defmodule EspecPhoenix.Mixfile do
   use Mix.Project
 
-  @version "0.1.3"
+  @version "0.1.4"
 
   def project do
     [app: :espec_phoenix,

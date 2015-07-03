@@ -21,7 +21,7 @@ Add `espec_phoenix` to dependencies in the `mix.exs` file:
 ```elixir
 def deps do
   ...
-  {:espec_phoenix, "~> 0.1.3", only: :test, app: false},
+  {:espec_phoenix, "~> 0.1.4", only: :test, app: false},
   #{:espec, github: "antonmi/espec_phoenix", only: :test, app: false}, to get the latest version
   ...
 end
