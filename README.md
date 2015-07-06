@@ -52,7 +52,10 @@ The task creates `phoenix_helper.exs`, `espec_phoenix_extend.ex`, and basic spec
 `phoenix_helper.exs` has Phoenix related configurations.
 Replace `App.Repo` with your repo module.
 
-You must require this helper in your `spec_helper.exs`.
+You must require this helper in your `spec_helper.exs`:
+```elixir
+Code.require_file("spec/phoenix_helper.exs")
+```
 Also you need restart `Ecto` transaction before each example. So `spec_helper.exs` should look like:
 ```elixir
 #require phoenix_helper.exs
