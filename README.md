@@ -7,6 +7,8 @@ There are examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/m
 
 Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 
+The project is not in active development, I'm waiting for ~ 1.0 version of Phoenix.
+
 ## Contents
 - [Installation](#installation)
 - [Model specs](#model-specs)
