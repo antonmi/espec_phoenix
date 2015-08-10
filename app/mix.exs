@@ -30,12 +30,12 @@ defmodule App.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.13.1"},
-     {:phoenix_ecto, "~> 0.4"},
+    [{:phoenix, "~> 0.16.1"},
+     {:phoenix_ecto, "~> 1.0.0"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 1.0"},
+     {:phoenix_html, "~> 2.1.0"},
      {:espec_phoenix, path: "/home/antonmi/elixir/espec_phoenix", only: :test, app: false},
-     {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:phoenix_live_reload, "~> 0.6.0", only: :dev},
      {:cowboy, "~> 1.0"}]
   end
 end

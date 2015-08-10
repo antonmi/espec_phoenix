@@ -2,7 +2,7 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveHttpStatus do
 
   use ESpec.Assertions.Interface
 
-  @statuses = [
+  @statuses [
     continue: 100,
     switching_protocols: 101,
     processing: 102,

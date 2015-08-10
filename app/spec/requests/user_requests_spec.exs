@@ -89,7 +89,7 @@ defmodule App.UserRequestsSpec do
 
   describe "show user" do
     before do
-      user = %User{name: "Bill", age: 25} |> Repo.insert
+      {:ok, user} = %User{name: "Bill", age: 25} |> Repo.insert
       {:ok, user: user}
     end
 
