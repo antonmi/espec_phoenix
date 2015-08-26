@@ -24,7 +24,7 @@ defmodule App.UserControllerSpec do
 
     subject do: action :index
 
-    it do: should be_successfull
+    it do: should be_successful
     it do: should have_http_status 200
 
     it do: should render_template("index.html")
@@ -47,7 +47,7 @@ defmodule App.UserControllerSpec do
   describe "new" do
     subject do: action :new
 
-    it do: should be_successfull
+    it do: should be_successful
     it do: should have_in_assigns(changeset: User.changeset(%User{}))
   end
 
@@ -84,7 +84,7 @@ defmodule App.UserControllerSpec do
 
     subject do: action(:show, %{"id" => 1})
 
-    it do: should be_successfull
+    it do: should be_successful
     it do: should render_template("show.html")
 
     it do: should have_in_assigns(user: user)
@@ -102,7 +102,7 @@ defmodule App.UserControllerSpec do
 
     subject do: action(:edit, %{"id" => 1})
 
-    it do: should be_successfull
+    it do: should be_successful
     it do: should render_template("edit.html")
 
     let :changeset, do: User.changeset(user) 

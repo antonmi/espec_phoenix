@@ -115,7 +115,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
       subject do: action :index
 
-      it do: should be_successfull
+      it do: should be_successful
       it do: should have_in_assigns(:examples, examples)
       
     end
@@ -148,7 +148,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
       subject! do: get(conn(), examples_path(conn(), :index))
 
-      it do: should be_successfull
+      it do: should be_successful
       it do: should be_success
 
       context "check body" do

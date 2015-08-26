@@ -123,8 +123,8 @@ defmodule App.UserControllerSpec do
     end
 
     subject do: action(:show, %{"id" => 1})
-    
-    it do: should be_successfull
+
+    it do: should be_successful
     it do: should render_template("show.html")
     it do: should have_in_assigns(user: user)
   end
@@ -134,7 +134,7 @@ end
 #### Conn helpers
 ##### Check status
 ```elixir
-expect(res_conn).to be_successfull  #or be_success
+expect(res_conn).to be_successful  #or be_success
 ... be_redirection                  #be_redirect
 ... be_not_found                    #be_missing
 ... be_server_error                 #be_error
@@ -217,7 +217,7 @@ defmodule App.UserRequestsSpec do
 
     subject! do: get(conn(), user_path(conn(), :index))
 
-    it do: should be_successfull
+    it do: should be_successful
 
     it "checks content" do
       should have_content __.user1.name

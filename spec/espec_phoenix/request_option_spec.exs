@@ -8,7 +8,7 @@ defmodule RequestOptionSpec do
 
 	xcontext "use Phoenix.ConnTest and import ESpec.Phoenix.Assertions.Helpers" do
 		subject! get(conn, "/hello", %{"hello" => "world"})
-		it do: should be_successfull
+		it do: should be_successful
 	end
 
 end
