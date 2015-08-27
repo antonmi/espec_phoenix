@@ -1,9 +1,9 @@
 defmodule ESpec.Phoenix.Assertions.Conn.Helpers do
 
   def have_http_status(value), do: {ESpec.Phoenix.Assertions.Conn.HaveHttpStatus, value}
- 
-  def be_successfull, do: {ESpec.Phoenix.Assertions.Conn.BeSuccessfull, []}
-  def be_success, do: {ESpec.Phoenix.Assertions.Conn.BeSuccessfull, []}  
+
+  def be_successful, do: {ESpec.Phoenix.Assertions.Conn.BeSuccessful, []}
+  def be_success, do: {ESpec.Phoenix.Assertions.Conn.BeSuccessful, []}
   def be_redirection, do: {ESpec.Phoenix.Assertions.Conn.BeRedirection, []}
   def be_redirect, do: {ESpec.Phoenix.Assertions.Conn.BeRedirection, []}
   def be_not_found, do: {ESpec.Phoenix.Assertions.Conn.BeNotFound, []}

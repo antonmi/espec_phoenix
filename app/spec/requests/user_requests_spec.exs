@@ -15,7 +15,7 @@ defmodule App.UserRequestsSpec do
     end
 
     subject! do: get(conn(), user_path(conn(), :index))
-    it do: should be_successfull
+    it do: should be_successful
 
     it "checks content" do
       should have_content __.user1.name
@@ -94,7 +94,7 @@ defmodule App.UserRequestsSpec do
     end
 
     subject! do: get(conn(), user_path(conn(), :show, __.user))
-    it do: should be_successfull
+    it do: should be_successful
 
     it "checks content" do
       should have_content_in("ul li", __.user.name)

@@ -10,7 +10,7 @@ defmodule ControllerOptionSpec do
 
   context "import ESpec.Phoenix.Assertions.Helpers" do
     subject action(:hello, %{"hello" => "world"})
-    it do: should be_successfull
+    it do: should be_successful
   end
 
 end

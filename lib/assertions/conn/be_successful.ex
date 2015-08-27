@@ -1,4 +1,4 @@
-defmodule ESpec.Phoenix.Assertions.Conn.BeSuccessfull do
+defmodule ESpec.Phoenix.Assertions.Conn.BeSuccessful do
 
   use ESpec.Assertions.Interface
 
@@ -8,12 +8,12 @@ defmodule ESpec.Phoenix.Assertions.Conn.BeSuccessfull do
 
   defp success_message(conn, _value, _result, positive) do
     be = if positive, do: "is", else: "is not"
-    "`#{inspect conn}` #{be} successfull."
-  end  
+    "`#{inspect conn}` #{be} successful."
+  end
 
   defp error_message(conn, _value, result, positive) do
     be = if positive, do: "be", else: "not to be"
-    "Expected `#{inspect conn}` to #{be} successfull, but the status is #{result}."
+    "Expected `#{inspect conn}` to #{be} successful, but the status is #{result}."
   end
 
 end
