@@ -61,7 +61,7 @@ Code.require_file("spec/phoenix_helper.exs")
 Also you need restart `Ecto` transaction before each example. So `spec_helper.exs` should look like:
 ```elixir
 #require phoenix_helper.exs
-Code.require_file("spec/phoenix_helper.exs")
+Code.require_file("#{__DIR__}/phoenix_helper.exs")
 
 ESpec.start
   

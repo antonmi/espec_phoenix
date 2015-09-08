@@ -11,16 +11,16 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   @controllers_folder "controllers"
   @controller_spec "example_controller_spec.exs"
-  
+
   @models_folder "models"
   @model_spec "example_model_spec.exs"
-  
+
   @requests_folder "requests"
   @request_spec "example_requests_spec.exs"
-  
+
   @routers_folder "routers"
   @router_spec "example_routers_spec.exs"
-  
+
   @views_folder "views"
   @view_spec "example_views_spec.exs"
 
@@ -28,26 +28,26 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     app = Mix.Phoenix.base
     create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(nil))
     create_file(Path.join(@spec_folder, @espec_phoenix_extend), espec_phoenix_extend_template(app: app))
-    
+
     create_directory Path.join(@spec_folder, @controllers_folder)
     create_file(Path.join("#{@spec_folder}/#{@controllers_folder}", @controller_spec), controller_spec_template(app: app))
 
     create_directory Path.join(@spec_folder, @models_folder)
     create_file(Path.join("#{@spec_folder}/#{@models_folder}", @model_spec), model_spec_template(app: app))
-    
+
     create_directory Path.join(@spec_folder, @requests_folder)
     create_file(Path.join("#{@spec_folder}/#{@requests_folder}", @request_spec), request_spec_template(app: app))
-    
+
     create_directory Path.join(@spec_folder, @routers_folder)
     create_file(Path.join("#{@spec_folder}/#{@routers_folder}", @router_spec), router_spec_template(app: app))
 
      create_directory Path.join(@spec_folder, @views_folder)
     create_file(Path.join("#{@spec_folder}/#{@views_folder}", @view_spec), view_spec_template(app: app))
-    
+
   end
 
   embed_template :phoenix_helper, """
-  Code.require_file("spec/espec_phoenix_extend.ex")
+  Code.require_file("#{__DIR__}/espec_phoenix_extend.ex")
 
   Mix.Task.run "ecto.create", ["--quiet"]
   Mix.Task.run "ecto.migrate", ["--quiet"]
@@ -56,7 +56,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :espec_phoenix_extend, """
   defmodule ESpec.Phoenix.Extend do
-  
+
     def model do
       quote do
         alias <%= @app %>.Repo
@@ -79,7 +79,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
     def router do
       quote do
-        
+
       end
     end
 
@@ -117,7 +117,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
       it do: should be_successful
       it do: should have_in_assigns(:examples, examples)
-      
+
     end
   end
   """
@@ -139,7 +139,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     use ESpec.Phoenix, request: <%= @app %>.Endpoint
 
     describe "index" do
-      
+
       before do
         ex1 = %<%= @app %>.Example{title: "Example 1"} |> <%= @app %>.Repo.insert
         ex2 = %<%= @app %>.Example{title: "Example 2"} |> <%= @app %>.Repo.insert
@@ -187,7 +187,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
       it do: should have_content "Example 1"
       it do: should have_text "Example 2"
     end
-  end  
+  end
   """
 
 end
