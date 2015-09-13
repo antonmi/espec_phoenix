@@ -30,7 +30,7 @@ defmodule EspecPhoenix.Mixfile do
     [
       {:espec, "0.7.0"},
       {:phoenix, ">= 0.0.0"},
-      {:floki, "~> 0.3.2"}
+      {:floki, "~> 0.3.3"}
     ]
   end
 

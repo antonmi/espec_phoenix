@@ -47,7 +47,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   end
 
   embed_template :phoenix_helper, """
-  Code.require_file("#{__DIR__}/espec_phoenix_extend.ex")
+  Code.require_file("spec/espec_phoenix_extend.ex")
 
   Mix.Task.run "ecto.create", ["--quiet"]
   Mix.Task.run "ecto.migrate", ["--quiet"]
@@ -56,7 +56,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :espec_phoenix_extend, """
   defmodule ESpec.Phoenix.Extend do
-
     def model do
       quote do
         alias <%= @app %>.Repo
@@ -98,7 +97,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :controller_spec, """
   defmodule <%= @app %>.ExampleControllerSpec do
-
     use ESpec.Phoenix, controller: <%= @app %>.PostsController
 
     describe "index" do
@@ -124,7 +122,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :model_spec, """
   defmodule <%= @app %>.ExampleModelSpec do
-
     use ESpec.Phoenix, model: <%= @app %>.Example
 
     let :example, do: %<%= @app %>.Example{title: "Example 1"}
@@ -135,7 +132,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :request_spec, """
   defmodule <%= @app %>.PostsRequestsSpec do
-
     use ESpec.Phoenix, request: <%= @app %>.Endpoint
 
     describe "index" do
@@ -163,7 +159,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :router_spec, """
   defmodule <%= @app %>.Routes.PostsRoutesSpec do
-
     use ESpec.Phoenix, router: App.Router
 
   end
@@ -171,7 +166,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :view_spec, """
   defmodule <%= @app %>.ExampleViewsSpec do
-
     use ESpec.Phoenix, view: <%= @app %>.ExamplesView
 
     describe "index html" do
@@ -189,5 +183,4 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     end
   end
   """
-
 end
