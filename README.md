@@ -7,7 +7,7 @@ There are examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/m
 
 Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 
-See [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_app) for usage examples.
+See [test_app/spec](https://github.com/antonmi/espec_phoenix/tree/master/test_app/spec) for usage examples.
 
 ## Contents
 - [Installation](#installation)
