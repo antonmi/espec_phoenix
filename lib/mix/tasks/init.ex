@@ -1,5 +1,4 @@
 defmodule Mix.Tasks.EspecPhoenix.Init do
-
   use Mix.Task
   import Mix.Generator
 
@@ -18,9 +17,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   @requests_folder "requests"
   @request_spec "example_requests_spec.exs"
 
-  @routers_folder "routers"
-  @router_spec "example_routers_spec.exs"
-
   @views_folder "views"
   @view_spec "example_views_spec.exs"
 
@@ -38,12 +34,8 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     create_directory Path.join(@spec_folder, @requests_folder)
     create_file(Path.join("#{@spec_folder}/#{@requests_folder}", @request_spec), request_spec_template(app: app))
 
-    create_directory Path.join(@spec_folder, @routers_folder)
-    create_file(Path.join("#{@spec_folder}/#{@routers_folder}", @router_spec), router_spec_template(app: app))
-
-     create_directory Path.join(@spec_folder, @views_folder)
+    create_directory Path.join(@spec_folder, @views_folder)
     create_file(Path.join("#{@spec_folder}/#{@views_folder}", @view_spec), view_spec_template(app: app))
-
   end
 
   embed_template :phoenix_helper, """
@@ -154,13 +146,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
         it do: html |> should have_text __.ex2.title
       end
     end
-  end
-  """
-
-  embed_template :router_spec, """
-  defmodule <%= @app %>.Routes.PostsRoutesSpec do
-    use ESpec.Phoenix, router: App.Router
-
   end
   """
 
