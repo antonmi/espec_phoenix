@@ -23,7 +23,7 @@ Add `espec_phoenix` to dependencies in the `mix.exs` file:
 ```elixir
 def deps do
   ...
-  {:espec_phoenix, "~> 0.1.5", only: :test, app: false},
+  {:espec_phoenix, "~> 0.1.7", only: :test, app: false},
   #{:espec, github: "antonmi/espec_phoenix", only: :test, app: false}, to get the latest version
   ...
 end
@@ -64,15 +64,15 @@ Also you need restart `Ecto` transaction before each example. So `spec_helper.ex
 Code.require_file("#{__DIR__}/phoenix_helper.exs")
 
 ESpec.start
-  
+
 ESpec.configure fn(config) ->
   config.before fn ->
     #restart transactions
     Ecto.Adapters.SQL.restart_test_transaction(YourApplication.Repo, [])
   end
-  
-  config.finally fn(__) -> 
-    
+
+  config.finally fn(__) ->
+
   end
 end
 ```
@@ -111,9 +111,9 @@ There is the `action/2` helper function wich call controller functions directy.
 defmodule App.UserControllerSpec do
   use ESpec.Phoenix, controller: App.UserController
   alias App.User
-  
+
   describe "show" do
-    let :user, do: %User{id: 1, age: 25, name: "Jim"} 
+    let :user, do: %User{id: 1, age: 25, name: "Jim"}
 
     before do
       allow(Repo).to accept(:get, fn
@@ -165,11 +165,11 @@ There is the `render/2` helper function available in the view specs.
 defmodule App.UserViewsSpec do
   use ESpec.Phoenix, view: App.UserView
   alias App.User
-  
+
   describe "show" do
     let :user, do: %User{id: 1, age: 25, name: "Jim"}
     subject do: render("show.html", user: user)
-   
+
     it do: should have_text("Show user")
     it do: should have_text_in("ul li", user.name)
     it do: should have_text_in("ul li", user.age)
@@ -207,7 +207,7 @@ Both 'Conn helpers' and 'Content helpers' available.
 defmodule App.UserRequestsSpec do
   use ESpec.Phoenix, request: App.Endpoint
   alias App.User
-  
+
   describe "list user" do
     before do
       user1 = %User{name: "Bill", age: 25} |> Repo.insert
@@ -226,5 +226,3 @@ defmodule App.UserRequestsSpec do
   end
 end  
 ```
-
-
