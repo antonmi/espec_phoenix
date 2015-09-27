@@ -2,7 +2,7 @@ defmodule TestApp.PostControllerTest do
   use TestApp.ConnCase
 
   alias TestApp.Post
-  @valid_attrs %{body: "some content", title: "some content"}
+  @valid_attrs %{title: "Post title", body: "some body content"}
   @invalid_attrs %{}
 
   setup do
