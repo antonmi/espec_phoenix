@@ -89,7 +89,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_template :controller_spec, """
   defmodule <%= @app %>.ExampleControllerSpec do
-    use ESpec.Phoenix, controller: <%= @app %>.PostsController
+    use ESpec.Phoenix, controller: <%= @app %>.ExampleController
 
     describe "index" do
       let :examples do
@@ -106,7 +106,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
       subject do: action :index
 
       it do: should be_successful
-      it do: should have_in_assigns(:examples, examples)
+      it do: should have_in_assigns(examples: examples)
 
     end
   end

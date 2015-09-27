@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, list) when is_list(list) do
@@ -20,12 +19,11 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveInAssigns do
   defp success_message(conn, value, _result, positive) do
     has = if positive, do: "has", else: "has not"
     "`#{inspect conn}` #{has} assigns `#{inspect value}`."
-  end  
+  end
 
   defp error_message(conn, value, _result, positive) do
     have = if positive, do: "have", else: "not to have"
     but = if positive, do: "it has not", else: "it has"
     "Expected `#{inspect conn}` to #{have} assigns `#{inspect value}`, but #{but}."
   end
-
 end
