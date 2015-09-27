@@ -37,7 +37,7 @@ defmodule EspecPhoenix.Mixfile do
   defp package do
    [
      files: ~w(lib mix.exs README.md),
-     contributors: ["Anton Mishchuk"],
+     maintainers: ["Anton Mishchuk"],
      licenses: ["MIT"],
      links: %{"github" => "https://github.com/antonmi/espec_phoenix"}
    ]
