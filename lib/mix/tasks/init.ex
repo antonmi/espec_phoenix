@@ -68,18 +68,11 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
       end
     end
 
-    def router do
-      quote do
-
-      end
-    end
-
     def view do
       quote do
         import <%= @app %>.Router.Helpers
       end
     end
-
 
     defmacro __using__(which) when is_atom(which) do
       apply(__MODULE__, which, [])
@@ -107,7 +100,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
       it do: should be_successful
       it do: should have_in_assigns(examples: examples)
-
     end
   end
   """
@@ -118,7 +110,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
     let :example, do: %<%= @app %>.Example{title: "Example 1"}
     it do: example.title |> should eq "Example 1"
-
   end
   """
 
@@ -127,7 +118,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     use ESpec.Phoenix, request: <%= @app %>.Endpoint
 
     describe "index" do
-
       before do
         ex1 = %<%= @app %>.Example{title: "Example 1"} |> <%= @app %>.Repo.insert
         ex2 = %<%= @app %>.Example{title: "Example 2"} |> <%= @app %>.Repo.insert
