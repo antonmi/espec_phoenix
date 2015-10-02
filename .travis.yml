@@ -1,9 +1,7 @@
 language: elixir
 elixir:
-  - 1.0.5
-  - 1.1.0-rc.0
+  - 1.1.0
 otp_release:
-  - 17.5
   - 18.0
 sudo: false
 before_script:
@@ -12,6 +10,7 @@ before_script:
   - cat config/database.config >> config/test.exs
 script:
   - mix deps.get
+  - mix test
   - mix espec --silent
 notifications:
   recipients:
