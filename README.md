@@ -15,6 +15,7 @@ See [test_app/spec](https://github.com/antonmi/espec_phoenix/tree/master/test_ap
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
 - [Requests specs](#requests-specs)
+- [Contributing](#contributing)
 
 ## Installation
 
@@ -226,3 +227,10 @@ defmodule App.UserRequestsSpec do
   end
 end  
 ```
+## Contributing
+There is a [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_app) with specs inside.
+Specify the path to `espec_phoenix` in the `test_app/mix.exs` file.
+Then run `mix deps.get`.
+Change database settings in `test_app/config/test.exs`.
+Run tests with `mix espec`
+
