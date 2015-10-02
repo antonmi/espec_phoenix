@@ -6,9 +6,13 @@ otp_release:
   - 17.5
   - 18.0
 sudo: false
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cd test_app
+  - cat config/database.config >> config/test.exs
 script:
-  - cd test_app && mix test
-  - cd test_app && mix espec --silent
+  - mix deps.get
+  - mix espec --silent
 notifications:
   recipients:
     - anton.mishchuk@gmail.com

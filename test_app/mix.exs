@@ -35,7 +35,7 @@ defmodule TestApp.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:espec_phoenix, path: "/Users/antonmi/elixir/espec_phoenix", only: :test, app: false},
+     {:espec_phoenix, path: "..", only: :test, app: false},
      {:cowboy, "~> 1.0"}]
   end
 end
