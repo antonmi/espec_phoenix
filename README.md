@@ -1,5 +1,5 @@
 # ESpecPhoenix
-[![Build Status](https://travis-ci.org/antonmi/espec.svg?branch=master)](https://travis-ci.org/antonmi/espec)
+[![Build Status](https://travis-ci.org/antonmi/espec.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
 
 ##### ESpec helpers and matchers for Phoenix web framework.
 Read about ESpec [here](https://github.com/antonmi/espec).
