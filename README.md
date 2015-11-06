@@ -73,7 +73,7 @@ ESpec.configure fn(config) ->
     Ecto.Adapters.SQL.restart_test_transaction(YourApplication.Repo, [])
   end
 
-  config.finally fn(__) ->
+  config.finally fn(shared) ->
 
   end
 end
@@ -99,10 +99,10 @@ end
 ```
 #### Changeset helpers
 ```elixir
-expect(changeset).to be_valid
-... have_errors(:name)
-... have_errors([:name, :surname])
-... have_errors(name: "can't be blank", surname: "can't be blank")
+expect changeset |> to be_valid
+... have_errors :name
+... have_errors [:name, :surname]
+... have_errors name: "can't be blank", surname: "can't be blank"
 
 ```
 
@@ -118,7 +118,7 @@ defmodule App.UserControllerSpec do
     let :user, do: %User{id: 1, age: 25, name: "Jim"}
 
     before do
-      allow(Repo).to accept(:get, fn
+      allow Repo |> to accept(:get, fn
         User, 1 -> user
         User, id -> passthrough([id])
       end)
@@ -136,29 +136,29 @@ end
 #### Conn helpers
 ##### Check status
 ```elixir
-expect(res_conn).to be_successful  #or be_success
-... be_redirection                  #be_redirect
-... be_not_found                    #be_missing
-... be_server_error                 #be_error
+expect res_conn |> to be_successful  #or be_success
+... be_redirection                   #be_redirect
+... be_not_found                     #be_missing
+... be_server_error                  #be_error
 
-... have_http_status(code)
-... redirect_to(user_path(conn, :index))
+... have_http_status code
+... redirect_to user_path(conn, :index)
 ```
 ##### Check template and view
 ```elixir
-expect(res_conn).to render_template("index.html")
-... use_view(App.UserView)
+expect res_conn |> to render_template "index.html"
+... use_view App.UserView
 ```
 ##### Check assigns
 ```elixir
-expect(res_conn).to have_in_assigns(:users)
-... have_in_assigns([:users, :options])
-... have_in_assigns(users: users, options: options)
+expect res_conn |> to have_in_assigns :users
+... have_in_assigns [:users, :options]
+... have_in_assigns users: users, options: options
 ```
 ##### Check flash
 ```elixir
-expect(res_conn).to have_in_flash(:info)
-... have_in_flash(info: "User created successfully.")
+expect res_conn |> to have_in_flash :info
+... have_in_flash info: "User created successfully."
 ```
 ## View specs
 There is the `render/2` helper function available in the view specs.
@@ -184,21 +184,21 @@ There are some mathers for html string or for `conn` structure.
 #### Content helpers
 ##### Check presence of plain text
 ```elixir
-expect(html).to have_text("some text")    #String.contains?(html, "some text")
-... have_content("some text")
+expect html |> to have_text("some text")    #String.contains?(html, "some text")
+... have_content "some text"
 ```
 ##### Check presence of some selector
 ```elixir
-expect(html).to have_selector("input #user_name")   #Floki.find(html, "input #user_name")
+expect html |> to have_selector "input #user_name"   #Floki.find(html, "input #user_name")
 ```
 
 ##### Check text in the selector
 ```elixir
-expect(html).to have_text_in("label", "Name")
+expect html |> to have_text_in "label", "Name"
 ```
 ##### Check attributes in the selector
 ```elixir
-expect(html).to have_attributes_in("form", action: "/users", method: "post")
+expect html |> to have_attributes_in "form", action: "/users", method: "post"
 ```
 ## Requests specs
 Requests specs tests request/response cycles from end to end using a black box approach.
@@ -214,7 +214,7 @@ defmodule App.UserRequestsSpec do
     before do
       user1 = %User{name: "Bill", age: 25} |> Repo.insert
       user2 = %User{name: "Jonh", age: 26} |> Repo.insert
-      {:ok, user1: user1, user2: user2}
+      {:shared, user1: user1, user2: user2}
     end
 
     subject! do: get(conn(), user_path(conn(), :index))
