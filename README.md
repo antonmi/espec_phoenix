@@ -220,8 +220,8 @@ defmodule App.UserRequestsSpec do
     it do: should be_successful
 
     it "checks content" do
-      should have_content __.user1.name
-      should have_content __.user2.name
+      should have_content shared.user1.name
+      should have_content shared.user2.name
     end
   end
 end  
