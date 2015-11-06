@@ -5,7 +5,7 @@ defmodule TestApp.PostsRequestsSpec do
     before do
       {:ok, ex1} = %TestApp.Post{title: "Post title 1", body: "some body content"} |> TestApp.Repo.insert
       {:ok, ex2} = %TestApp.Post{title: "Post title 2", body: "some body content"} |> TestApp.Repo.insert
-      {:ok, ex1: ex1, ex2: ex2}
+      {:shared, ex1: ex1, ex2: ex2}
     end
 
     subject! do: get(conn(), post_path(conn(), :index))
@@ -53,7 +53,7 @@ defmodule TestApp.PostsRequestsSpec do
 
         context "check record" do
           let :post, do: Repo.one(from p in TestApp.Post, select: p)
-          it do: expect(post.title).to eq(valid_attrs[:title])
+          it do: expect post.title |> to eq valid_attrs[:title]
         end
       end
 
