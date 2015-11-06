@@ -4,8 +4,6 @@
 ##### ESpec helpers and matchers for Phoenix web framework.
 Read about ESpec [here](https://github.com/antonmi/espec).
 
-There are examples in [app/spec](https://github.com/antonmi/espec_phoenix/tree/master/app/spec).
-
 Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
 
 See [test_app/spec](https://github.com/antonmi/espec_phoenix/tree/master/test_app/spec) for usage examples.
