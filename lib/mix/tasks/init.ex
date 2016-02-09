@@ -4,6 +4,24 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   @shortdoc "Create espec_phoenix folders and files"
 
+  @moduledoc """
+  Creates espec_phoenix folders and files.
+
+  This task creates the following files:
+
+    * `spec/phoenix_helper.exs`
+    * `spec/espec_phoenix_extend.ex`
+    * `spec/controllers/example_controller_spec.exs`
+    * `spec/models/example_model_spec.exs`
+    * `spec/requests/example_requests_spec.exs`
+    * `spec/views/example/views_spec.exs`
+
+  ## Command line options
+
+  * `--skip-examples` - skip creating of example files
+
+  """
+
   @spec_folder "spec"
   @phoenix_helper "phoenix_helper.exs"
   @espec_phoenix_extend "espec_phoenix_extend.ex"
@@ -20,21 +38,33 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   @views_folder "views"
   @view_spec "example_views_spec.exs"
 
-  def run(_args) do
+  def run(args) do
+    {opts, _, _} = OptionParser.parse(args)
     app = Mix.Phoenix.base
+
+    create_directories
+    create_files(app)
+    unless opts[:skip_examples] do
+      create_examples(app)
+    end
+  end
+
+  defp create_directories do
+    create_directory Path.join(@spec_folder, @controllers_folder)
+    create_directory Path.join(@spec_folder, @models_folder)
+    create_directory Path.join(@spec_folder, @requests_folder)
+    create_directory Path.join(@spec_folder, @views_folder)
+  end
+
+  defp create_files(app) do
     create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(nil))
     create_file(Path.join(@spec_folder, @espec_phoenix_extend), espec_phoenix_extend_template(app: app))
+  end
 
-    create_directory Path.join(@spec_folder, @controllers_folder)
+  defp create_examples(app) do
     create_file(Path.join("#{@spec_folder}/#{@controllers_folder}", @controller_spec), controller_spec_template(app: app))
-
-    create_directory Path.join(@spec_folder, @models_folder)
     create_file(Path.join("#{@spec_folder}/#{@models_folder}", @model_spec), model_spec_template(app: app))
-
-    create_directory Path.join(@spec_folder, @requests_folder)
     create_file(Path.join("#{@spec_folder}/#{@requests_folder}", @request_spec), request_spec_template(app: app))
-
-    create_directory Path.join(@spec_folder, @views_folder)
     create_file(Path.join("#{@spec_folder}/#{@views_folder}", @view_spec), view_spec_template(app: app))
   end
 
