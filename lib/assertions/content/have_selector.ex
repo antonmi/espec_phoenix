@@ -11,18 +11,18 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveSelector do
       nil -> {false, false}
       [] -> {false, false}
       list when is_list(list) -> {true, list}
-    end  
+    end
   end
 
   defp success_message(%Plug.Conn{resp_body: html}, selector, result, positive), do: success_message(html, selector, result, positive)
-  
+
   defp success_message(html, selector, result, positive) do
     has = if positive, do: "has", else: "has not"
     "`#{html}` #{has} selector `#{selector}`: `#{inspect result}`."
-  end  
+  end
 
-  defp error_message(%Plug.Conn{resp_body: html}, selector, _result, positive), do: error_message(html, selector, _result, positive)
-  
+  defp error_message(%Plug.Conn{resp_body: html}, selector, result, positive), do: error_message(html, selector, result, positive)
+
   defp error_message(html, selector, _result, positive) do
     have = if positive, do: "have", else: "not to have"
     but = if positive, do: "has not", else: "has"

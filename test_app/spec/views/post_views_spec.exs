@@ -23,7 +23,7 @@ defmodule TestApp.PostViewsSpec do
   end
 
   describe "new" do
-    let :changeset, do: Post.changeset(%Post{})
+    let! :changeset, do: Post.changeset(%Post{})
     subject do: render("new.html", changeset: changeset)
 
     it do: should have_text("New post")

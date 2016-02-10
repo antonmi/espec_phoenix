@@ -6,7 +6,7 @@ ESpec.configure fn(config) ->
 		Ecto.Adapters.SQL.restart_test_transaction(TestApp.Repo, [])
 	end
 
-	config.finally fn(shared) -> 
-
+	config.finally fn(_shared) ->
+    :ok
 	end
 end

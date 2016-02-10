@@ -7,13 +7,13 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
   defp match(html, [selector, list]) when is_list list do
     el = find_element(html, selector)
     if el do
-      if Keyword.keyword?(list) do
+      result = if Keyword.keyword?(list) do
         list = Enum.map(list, fn{k, v} -> {"#{k}", v} end)
-        result = Enum.all?(list, fn{attr, value} ->
+        Enum.all?(list, fn{attr, value} ->
           Enum.member?(Floki.attribute(el, "#{attr}"), "#{value}")
         end)
       else
-        result = Enum.all?(list, fn(attr) ->
+        Enum.all?(list, fn(attr) ->
           !Enum.empty?(Floki.attribute(el, "#{attr}"))
         end)
       end
@@ -39,15 +39,15 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
       nil -> false
       [] -> false
       el -> el
-    end  
+    end
   end
 
   defp success_message(%Plug.Conn{resp_body: html}, [selector, value], result, positive), do: success_message(html, [selector, value], result, positive)
- 
+
   defp success_message(html, [selector, value], _result, positive) do
     has = if positive, do: "has", else: "has not"
     "`#{html}` #{has} attributes `#{inspect value}` in selector `#{selector}`."
-  end  
+  end
 
   defp error_message(html, [selector, value], :no_selector, positive) do
     have = if positive, do: "have", else: "not to have"
@@ -55,7 +55,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
   end
 
   defp error_message(%Plug.Conn{resp_body: html}, [selector, value], result, positive), do: error_message(html, [selector, value], result, positive)
- 
+
   defp error_message(html, [selector, value], _result, positive) do
     have = if positive, do: "have", else: "not to have"
     but = if positive, do: "it has not", else: "it has"

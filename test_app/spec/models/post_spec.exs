@@ -22,7 +22,7 @@ defmodule TestApp.Models.PostSpec do
     end
 
     it "checks body" do
-      should have_errors(body: {"should be at least %{count} characters", [count: 15]})
+      should have_errors(body: {"should be at least %{count} character(s)", [count: 15]})
     end
   end
 

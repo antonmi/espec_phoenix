@@ -28,9 +28,9 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, "~> 0.8.5"},
+      {:espec, "~> 0.8.10"},
       {:phoenix, ">= 0.0.0"},
-      {:floki, "~> 0.7.0"}
+      {:floki, "~> 0.7.1"}
     ]
   end
 

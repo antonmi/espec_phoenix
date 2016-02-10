@@ -3,11 +3,11 @@ defmodule ESpec.Phoenix.Assertions.Changeset.HaveErrors do
   use ESpec.Assertions.Interface
 
   defp match(changeset, list) when is_list list do
-    if Keyword.keyword?(list) do
-      result = Enum.all?(list, &Enum.member?(changeset.errors, &1))
+    result = if Keyword.keyword?(list) do
+      Enum.all?(list, &Enum.member?(changeset.errors, &1))
     else
       keys = Keyword.keys(changeset.errors)
-      result = Enum.all?(list, &Enum.member?(keys, &1))
+      Enum.all?(list, &Enum.member?(keys, &1))
     end
     {result, result}
   end

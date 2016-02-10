@@ -71,7 +71,7 @@ ESpec.configure fn(config) ->
     Ecto.Adapters.SQL.restart_test_transaction(YourApplication.Repo, [])
   end
 
-  config.finally fn(shared) ->
+  config.finally fn(_shared) ->
 
   end
 end
@@ -144,18 +144,18 @@ expect res_conn |> to be_successful  #or be_success
 ```
 ##### Check template and view
 ```elixir
-expect res_conn |> to render_template "index.html"
+expect res_conn |> to(render_template "index.html")
 ... use_view App.UserView
 ```
 ##### Check assigns
 ```elixir
-expect res_conn |> to have_in_assigns :users
+expect res_conn |> to(have_in_assigns :users)
 ... have_in_assigns [:users, :options]
 ... have_in_assigns users: users, options: options
 ```
 ##### Check flash
 ```elixir
-expect res_conn |> to have_in_flash :info
+expect res_conn |> to(have_in_flash :info)
 ... have_in_flash info: "User created successfully."
 ```
 ## View specs
@@ -182,21 +182,21 @@ There are some mathers for html string or for `conn` structure.
 #### Content helpers
 ##### Check presence of plain text
 ```elixir
-expect html |> to have_text("some text")    #String.contains?(html, "some text")
+expect html |> to(have_text "some text")    #String.contains?(html, "some text")
 ... have_content "some text"
 ```
 ##### Check presence of some selector
 ```elixir
-expect html |> to have_selector "input #user_name"   #Floki.find(html, "input #user_name")
+expect html |> to(have_selector "input #user_name")   #Floki.find(html, "input #user_name")
 ```
 
 ##### Check text in the selector
 ```elixir
-expect html |> to have_text_in "label", "Name"
+expect html |> to(have_text_in "label", "Name")
 ```
 ##### Check attributes in the selector
 ```elixir
-expect html |> to have_attributes_in "form", action: "/users", method: "post"
+expect html |> to(have_attributes_in "form", action: "/users", method: "post")
 ```
 ## Requests specs
 Requests specs tests request/response cycles from end to end using a black box approach.
@@ -231,4 +231,3 @@ There is a [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_
 Run `mix deps.get` in `test_app` folder.
 Change database settings in `test_app/config/test.exs`.
 Run tests with `mix espec`
-

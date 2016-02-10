@@ -14,8 +14,8 @@ defmodule TestApp.PostsRequestsSpec do
     context "check body" do
       let :html, do: subject.resp_body
 
-      it do: html |> should have_content shared.ex1.title
-      it do: html |> should have_text shared.ex2.title
+      it do: html |> should(have_content shared.ex1.title)
+      it do: html |> should(have_text shared.ex2.title)
     end
   end
 
@@ -53,7 +53,7 @@ defmodule TestApp.PostsRequestsSpec do
 
         context "check record" do
           let :post, do: Repo.one(from p in TestApp.Post, select: p)
-          it do: expect post.title |> to eq valid_attrs[:title]
+          it do: expect post.title |> to(eq valid_attrs[:title])
         end
       end
 
@@ -69,7 +69,7 @@ defmodule TestApp.PostsRequestsSpec do
         end
 
         context "check record" do
-          it do: Repo.one(from p in TestApp.Post, select: p) |> should be_nil
+          it do: Repo.one(from p in TestApp.Post, select: p) |> should(be_nil)
         end
       end
     end
