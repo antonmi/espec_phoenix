@@ -139,7 +139,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     use ESpec.Phoenix, model: <%= @app %>.Example
 
     let :example, do: %<%= @app %>.Example{title: "Example 1"}
-    it do: example.title |> should eq "Example 1"
+    it do: example.title |> should(eq "Example 1")
   end
   """
 
@@ -162,8 +162,8 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
       context "check body" do
         let :html, do: subject.resp_body
 
-        it do: html |> should have_content __.ex1.title
-        it do: html |> should have_text __.ex2.title
+        it do: html |> should(have_content shared.ex1.title)
+        it do: html |> should(have_text shared.ex2.title)
       end
     end
   end
