@@ -1,5 +1,5 @@
 defmodule TestApp.PostViewsSpec do
-  use ESpec.Phoenix, view: TestApp.PostView
+  use ESpec.Phoenix, view: TestApp.PostView, async: true
 
   alias TestApp.Post
   let :post, do: %Post{id: 1, title: "Post title 1"}
