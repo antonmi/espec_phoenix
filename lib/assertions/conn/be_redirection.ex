@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.BeRedirection do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, _value) do
@@ -15,5 +14,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.BeRedirection do
     be = if positive, do: "be", else: "not to be"
     "Expected `#{inspect conn}` to #{be} redirection, but the status is #{result}."
   end
-
 end

@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.BeServerError do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, _value) do
@@ -15,5 +14,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.BeServerError do
     be = if positive, do: "be", else: "not to be"
     "Expected `#{inspect conn}` to #{be} server error, but the status is #{result}."
   end
-
 end

@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Content.HaveTextIn do
-
   use ESpec.Assertions.Interface
 
   defp match(%Plug.Conn{resp_body: html}, [selector, text]), do: match(html, [selector, text])
@@ -42,5 +41,4 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveTextIn do
     have = if positive, do: "have", else: "not to have"
     "Expected `#{html}` to #{have} text `#{text}` in selector `#{selector}`, but the text is `#{result}`."
   end
-
 end

@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Changeset.BeValid do
-
   use ESpec.Assertions.Interface
 
   defp match(changeset, _value) do
@@ -16,5 +15,4 @@ defmodule ESpec.Phoenix.Assertions.Changeset.BeValid do
     but = if positive, do: "it is not", else: "it is"
     "Expected `#{inspect changeset}` to #{be} valid, but #{but}."
   end
-
 end

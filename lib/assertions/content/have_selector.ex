@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Content.HaveSelector do
-
   use ESpec.Assertions.Interface
 
   defp match(%Plug.Conn{resp_body: html}, selector), do: match(html, selector)
@@ -28,5 +27,4 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveSelector do
     but = if positive, do: "has not", else: "has"
     "Expected `#{html}` to #{have} selector `#{selector}`, but it #{but}."
   end
-
 end

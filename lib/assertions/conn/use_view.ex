@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.UseView do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, view) do
@@ -15,5 +14,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.UseView do
     use_view = if positive, do: "use", else: "not to use"
     "Expected `#{inspect conn}` to #{use_view} `#{view}`, but it uses `#{result}`."
   end
-
 end

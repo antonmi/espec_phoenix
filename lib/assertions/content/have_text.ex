@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Content.HaveText do
-
   use ESpec.Assertions.Interface
 
   defp match(%Plug.Conn{resp_body: html}, val), do: match(html, val)
@@ -23,5 +22,4 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveText do
     has = if result, do: "has", else: "has not"
     "Expected `#{html}` #{to} have `#{inspect val}`, but it #{has}."
   end
-
 end

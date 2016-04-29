@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.HaveInFlash do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, list) when is_list list do
@@ -30,5 +29,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveInFlash do
     but = if positive, do: "it has not", else: "it has"
     "Expected `#{inspect conn}` to #{have} flash `#{inspect value}`, but #{but}."
   end
-
 end

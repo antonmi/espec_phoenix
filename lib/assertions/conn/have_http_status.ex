@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.HaveHttpStatus do
-
   use ESpec.Assertions.Interface
 
   @statuses [
@@ -82,5 +81,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.HaveHttpStatus do
     to = if positive, do: "have", else: "not to have"
     "Expected `#{inspect conn}` to #{to} status `#{value}`, but the status is #{result}."
   end
-
 end

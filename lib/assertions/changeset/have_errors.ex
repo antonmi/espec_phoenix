@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Changeset.HaveErrors do
-
   use ESpec.Assertions.Interface
 
   defp match(changeset, list) when is_list list do
@@ -27,5 +26,4 @@ defmodule ESpec.Phoenix.Assertions.Changeset.HaveErrors do
     but = if positive, do: "it has not", else: "it has"
     "Expected `#{inspect changeset}` to #{have} errors `#{inspect value}`, but #{but}."
   end
-
 end

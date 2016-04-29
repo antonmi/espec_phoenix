@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
-
   use ESpec.Assertions.Interface
 
   defp match(%Plug.Conn{resp_body: html}, [selector, list]), do: match(html, [selector, list])
@@ -61,5 +60,4 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveAttributesIn do
     but = if positive, do: "it has not", else: "it has"
     "Expected `#{html}` to #{have} attributes `#{inspect value}` in selector `#{selector}`, but #{but}."
   end
-
 end

@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Assertions.Conn.RenderTemplate do
-
   use ESpec.Assertions.Interface
 
   defp match(conn, template) do
@@ -15,5 +14,4 @@ defmodule ESpec.Phoenix.Assertions.Conn.RenderTemplate do
     render = if positive, do: "render", else: "not to render"
     "Expected `#{inspect conn}` to #{render} `#{template}`, but it renders `#{result}`."
   end
-
 end
