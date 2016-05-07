@@ -93,7 +93,7 @@ defmodule App.UserSpec do
     subject do: User.changeset(%User{}, valid_attrs)
     it do: should be_valid
   end
-end  
+end
 ```
 #### Changeset helpers
 ```elixir
@@ -210,8 +210,8 @@ defmodule App.UserRequestsSpec do
 
   describe "list user" do
     before do
-      user1 = %User{name: "Bill", age: 25} |> Repo.insert
-      user2 = %User{name: "Jonh", age: 26} |> Repo.insert
+      {:ok, user1} = %User{name: "Bill", age: 25} |> Repo.insert
+      {:ok, user2} = %User{name: "Jonh", age: 26} |> Repo.insert
       {:shared, user1: user1, user2: user2}
     end
 
@@ -224,7 +224,7 @@ defmodule App.UserRequestsSpec do
       should have_content shared.user2.name
     end
   end
-end  
+end
 ```
 ## Contributing
 There is a [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_app) with specs inside.
