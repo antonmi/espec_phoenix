@@ -25,7 +25,7 @@ defmodule ESpec.Phoenix.Assertions.Content.HaveTextIn do
 
   defp success_message(%Plug.Conn{resp_body: html}, [selector, text], result, positive), do: success_message(html, [selector, text], result, positive)
 
-  defp success_message(html, [selector, text], result, positive) do
+  defp success_message(html, [selector, text], _result, positive) do
     has = if positive, do: "has", else: "has not"
     "`#{html}` #{has} text `#{text}` in selector `#{selector}`."
   end
