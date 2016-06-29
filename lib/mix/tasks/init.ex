@@ -73,7 +73,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   Mix.Task.run "ecto.create", ["--quiet"]
   Mix.Task.run "ecto.migrate", ["--quiet"]
-  Ecto.Adapters.SQL.begin_test_transaction(App.Repo)
+  Ecto.Adapters.SQL.Sandbox.mode(App.Repo, :manual)
   """
 
   embed_template :espec_phoenix_extend, """
