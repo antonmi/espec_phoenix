@@ -8,7 +8,7 @@ defmodule TestApp.PostsRequestsSpec do
       {:shared, ex1: ex1, ex2: ex2}
     end
 
-    subject! do: get(conn(), post_path(conn(), :index))
+    subject! do: get(build_conn(), post_path(build_conn(), :index))
     it do: should be_successful
 
     context "check body" do
@@ -21,7 +21,7 @@ defmodule TestApp.PostsRequestsSpec do
 
   context "create post" do
     context "check new page" do
-      subject! do: get(conn(), post_path(conn(), :new))
+      subject! do: get(build_conn(), post_path(build_conn(), :new))
       it "checks inputs" do
         should have_selector("input#post_title")
         should have_selector("input#post_body")
@@ -44,10 +44,10 @@ defmodule TestApp.PostsRequestsSpec do
       let :valid_attrs, do: %{title: "Post title", body: "some body content"}
 
       context "success case" do
-        subject! do: post(conn(), post_path(conn(), :create), %{"post" => valid_attrs})
+        subject! do: post(build_conn(), post_path(build_conn(), :create), %{"post" => valid_attrs})
 
         context "check response" do
-          it do: should redirect_to(post_path(conn, :index))
+          it do: should redirect_to(post_path(build_conn, :index))
           it do: should have_in_flash(info: "Post created successfully.")
         end
 
@@ -59,7 +59,7 @@ defmodule TestApp.PostsRequestsSpec do
 
       context "error case" do
         let :invalid_attrs, do: %{title: "", body: "short body"}
-        subject! do: post(conn(), post_path(conn(), :create), %{"post" => invalid_attrs})
+        subject! do: post(build_conn(), post_path(build_conn(), :create), %{"post" => invalid_attrs})
 
         context "check response" do
           it do: should render_template("new.html")
