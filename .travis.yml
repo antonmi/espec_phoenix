@@ -19,3 +19,9 @@ script:
 notifications:
   recipients:
     - anton.mishchuk@gmail.com
+matrix:
+  exclude:
+    - elixir: 1.1.1
+      otp_release: 19.0
+    - elixir: 1.2.3
+      otp_release: 19.0
