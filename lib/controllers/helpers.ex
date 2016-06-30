@@ -1,5 +1,5 @@
 defmodule ESpec.Phoenix.Controllers.Helpers do
-	defmacro __using__(args) do
+	defmacro __using__(_args) do
 		quote do
 			use Plug.Test
 
