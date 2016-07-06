@@ -71,7 +71,7 @@ ESpec.configure fn(config) ->
   end
 
   config.finally fn(_shared) ->
-    Ecto.Adapters.SQL.Sandbox(App.Repo, [])
+    Ecto.Adapters.SQL.Sandbox.checkin(App.Repo, [])
   end
 end
 ```
