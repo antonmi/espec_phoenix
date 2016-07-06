@@ -58,7 +58,7 @@ You must require this helper in your `spec_helper.exs`:
 ```elixir
 Code.require_file("spec/phoenix_helper.exs")
 ```
-Also you need restart `Ecto` transaction before each example. So `spec_helper.exs` should look like:
+Also you need to checkout your `Ecto` sandbox mode before each example and checkin it after. So `spec_helper.exs` should look like:
 ```elixir
 #require phoenix_helper.exs
 Code.require_file("#{__DIR__}/phoenix_helper.exs")
@@ -67,12 +67,11 @@ ESpec.start
 
 ESpec.configure fn(config) ->
   config.before fn ->
-    #restart transactions
-    Ecto.Adapters.SQL.restart_test_transaction(YourApplication.Repo, [])
+    Ecto.Adapters.SQL.Sandbox.checkout(App.Repo, [])
   end
 
   config.finally fn(_shared) ->
-
+    Ecto.Adapters.SQL.Sandbox(App.Repo, [])
   end
 end
 ```

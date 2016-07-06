@@ -19,7 +19,7 @@ defmodule TestApp.PostViewsSpec do
 
     it do: should have_text("Show post")
     it do: should have_text_in("ul li", post.title)
-    it do: should have_attribute_in("a", href: post_path(conn, :index))
+    it do: should have_attribute_in("a", href: post_path(build_conn, :index))
   end
 
   describe "new" do
