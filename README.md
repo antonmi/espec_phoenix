@@ -225,6 +225,11 @@ defmodule App.UserRequestsSpec do
   end
 end
 ```
+
+## Extensions
+
+[test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
+
 ## Contributing
 There is a [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_app) with specs inside.
 Run `mix deps.get` in `test_app` folder.
