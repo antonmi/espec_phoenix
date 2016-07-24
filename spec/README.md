@@ -1,1 +1,1 @@
-The specs are in test_app application.
+The specs are in rumbl application.
