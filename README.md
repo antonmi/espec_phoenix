@@ -1,6 +1,11 @@
 # ESpecPhoenix
 [![Build Status](https://travis-ci.org/antonmi/espec.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
 
+### Warning! The next version of ESpecPhoenix will be completely redesigned and not compatible with previous versions.
+### The first reason is to make ESpecPhoenix follow Phoenix way, not Rails as it is now.
+### The second reason is to make a lightweight wrapper around ESpec which can be compatible with Phoenix helpers, and also be easy to extend.
+### Stay tuned! Coming soon!
+
 ##### ESpec helpers and matchers for Phoenix web framework.
 Read about ESpec [here](https://github.com/antonmi/espec).
 
