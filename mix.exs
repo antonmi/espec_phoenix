@@ -28,9 +28,8 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, "~> 0.8.22"},
+      {:espec, "~> 0.8.22", path: "/Users/antonmi/elixir/espec"},
       {:phoenix, ">= 0.0.0"},
-      {:floki, "~> 0.9.0"}
     ]
   end
 

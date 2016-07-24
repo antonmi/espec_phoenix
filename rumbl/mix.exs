@@ -41,7 +41,7 @@ defmodule Rumbl.Mixfile do
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 2.5"},
      {:cowboy, "~> 1.0"},
-     {:espec, "~> 0.8.26", path: "/Users/antonmi/elixir/espec" ,only: :test}
+     {:espec_phoenix, "~> 0.8.26", path: "/Users/antonmi/elixir/espec_phoenix", only: :test, app: false}
       ]
   end
 
