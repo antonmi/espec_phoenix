@@ -10,6 +10,7 @@ defmodule Rumbl.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
+     preferred_cli_env: [espec: :test],
      deps: deps()]
   end
 
@@ -39,7 +40,9 @@ defmodule Rumbl.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 2.5"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:espec, "~> 0.8.26", path: "/Users/antonmi/elixir/espec" ,only: :test}
+      ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
