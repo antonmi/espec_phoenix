@@ -11,7 +11,6 @@ defmodule Rumbl.VideoControllerTest do
     end
   end
 
-
   describe "without user" do
     test "requires user authentication on all actions", %{conn: conn} do
       Enum.each([

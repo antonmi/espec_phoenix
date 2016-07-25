@@ -1,5 +1,5 @@
 defmodule Rumbl.PageControllerTest do
-  use ESpec.Phoenix, controller: PageController
+  use ESpec.Phoenix, async: true, controller: PageController
 
   it "GET /" do
     conn = get init_conn, "/"

@@ -9,7 +9,7 @@ otp_release:
 sudo: false
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd test_app
+  - cd rumbl
   - cat config/database.config >> config/test.exs
 script:
   - mix deps.get

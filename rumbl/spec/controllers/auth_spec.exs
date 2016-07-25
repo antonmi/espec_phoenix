@@ -1,5 +1,5 @@
 defmodule Rumbl.AuthSpec do
-  use ESpec.Phoenix, aysnc: true, controller: Rumbl.AuthSpec
+  use ESpec.Phoenix, async: true, controller: Rumbl.AuthSpec
   alias Rumbl.Auth
 
   before do

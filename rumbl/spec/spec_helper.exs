@@ -2,11 +2,10 @@ Code.require_file("spec/phoenix_helper.exs")
 Code.require_file("spec/support/controller_setup.ex")
 
 ESpec.configure fn(config) ->
-  config.before fn(opts) ->
+  config.before fn(tags) ->
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Rumbl.Repo)
-
-    if controller = opts[:controller] do
-      ControllerSetup.setup(controller, opts)
+    if controller = tags[:controller] do
+      ControllerSetup.setup(controller, tags)
     else
       :ok
     end

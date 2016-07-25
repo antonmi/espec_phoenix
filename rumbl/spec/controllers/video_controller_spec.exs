@@ -1,5 +1,5 @@
 defmodule Rumbl.VideoControllerTest do
-  use ESpec.Phoenix, controller: VideoController,  async: true
+  use ESpec.Phoenix, async: true, controller: VideoController
 
   describe "without user" do
     let :conn, do: init_conn
@@ -102,7 +102,8 @@ defmodule Rumbl.VideoControllerTest do
 
       it "checks :edit action" do
         assert_error_sent :not_found, fn ->
-get(conn, video_path(conn, :edit, video)) end
+          get(conn, video_path(conn, :edit, video))
+        end
       end
 
       it "checks :update action" do
