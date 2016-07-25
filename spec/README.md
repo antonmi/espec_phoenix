@@ -1,1 +1,1 @@
-The specs are in rumbl application.
+See also specs in the rumbl application.

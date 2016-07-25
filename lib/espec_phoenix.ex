@@ -4,7 +4,7 @@ defmodule ESpec.Phoenix do
       Keyword.has_key?(args, :model) ->
         quote do
           use ESpec, unquote(args)
-          @view Keyword.get(unquote(args), :model)
+          @model Keyword.get(unquote(args), :model)
 
           use ESpec.Phoenix.ModelHelpers
 
@@ -27,7 +27,6 @@ defmodule ESpec.Phoenix do
           use ESpec, unquote(args)
           @view Keyword.get(unquote(args), :view)
 
-          # use ESpec.Phoenix.ModelHelpers
           use ESpec.Phoenix.ControllerHelpers
 
           import Phoenix.View

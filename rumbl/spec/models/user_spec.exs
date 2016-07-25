@@ -23,7 +23,6 @@ defmodule Rumbl.UserTest do
     end
   end
 
-
   context "password" do
     context "password length" do
       let :changeset do
