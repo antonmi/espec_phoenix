@@ -4,7 +4,7 @@ defmodule Rumbl.AuthSpec do
 
   before do
     conn =
-      init_conn
+      build_conn
       |> bypass_through(Rumbl.Router, :browser)
       |> get("/")
     {:ok, %{conn: conn}}

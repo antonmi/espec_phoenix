@@ -2,7 +2,7 @@ defmodule Rumbl.VideoControllerTest do
   use ESpec.Phoenix, async: true, controller: VideoController
 
   describe "without user" do
-    let :conn, do: init_conn
+    let :conn, do: build_conn
 
     it "requires user authentication on all actions" do
       Enum.each([
@@ -26,8 +26,8 @@ defmodule Rumbl.VideoControllerTest do
     let! :other_video, do: insert_video(insert_user(username: "other"), title: "another video")
 
     let :response do
-      assign(init_conn, :current_user, user)
-      |> get(video_path(init_conn, :index))
+      assign(build_conn, :current_user, user)
+      |> get(video_path(build_conn, :index))
     end
 
     it "lists all user's videos on index" do
@@ -92,7 +92,7 @@ defmodule Rumbl.VideoControllerTest do
       end
 
       let :another_user, do: insert_user(username: "another")
-      let! :conn, do: assign(init_conn, :current_user, another_user)
+      let! :conn, do: assign(build_conn, :current_user, another_user)
 
       it "checks :show action" do
         assert_error_sent :not_found,

@@ -33,7 +33,6 @@ defmodule ESpec.Phoenix do
           use ESpec.Phoenix.Extend, :view
         end
 
-
       true -> :ok
     end
   end
@@ -52,9 +51,9 @@ defmodule ESpec.Phoenix do
     defmacro __using__(_args) do
       quote do
         import Plug.Conn
-        import Phoenix.ConnTest, except: [conn: 0]
+        import Phoenix.ConnTest, except: [conn: 0, build_conn: 0]
 
-        def init_conn, do: Phoenix.ConnTest.build_conn()
+        def build_conn, do: Phoenix.ConnTest.build_conn()
       end
     end
   end

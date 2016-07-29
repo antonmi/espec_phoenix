@@ -9,7 +9,7 @@ defmodule Rumbl.VideoViewSpec do
 
   describe "index.html" do
     let :content do
-      render_to_string(Rumbl.VideoView, "index.html", conn: init_conn, videos: videos)
+      render_to_string(Rumbl.VideoView, "index.html", conn: build_conn, videos: videos)
     end
 
     it do: expect(content).to have("Listing videos")
@@ -27,7 +27,7 @@ defmodule Rumbl.VideoViewSpec do
       changeset = Rumbl.Video.changeset(%Rumbl.Video{})
       categories = [{"cats", 123}]
 
-      render_to_string(Rumbl.VideoView, "new.html", conn: init_conn,
+      render_to_string(Rumbl.VideoView, "new.html", conn: build_conn,
         changeset: changeset, categories: categories)
     end
 

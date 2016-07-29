@@ -1,6 +1,14 @@
 defmodule ESpec.Phoenix.Extend do
   defmodule ModelHelpers do
-    def module_helper_fun, do: :fun
+    def model_helper_fun, do: :fun
+  end
+
+  defmodule ViewHelpers do
+    def view_helper_fun, do: :fun
+  end
+
+  defmodule ControllerHelpers do
+    def controller_helper_fun, do: :fun
   end
 
   def model do
@@ -11,12 +19,13 @@ defmodule ESpec.Phoenix.Extend do
 
   def controller do
     quote do
-
+      import ControllerHelpers
     end
   end
 
   def view do
     quote do
+      import ViewHelpers
     end
   end
 

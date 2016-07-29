@@ -14,7 +14,7 @@ before_script:
 script:
   - mix deps.get
   - mix test
-  - mix espec --silent
+  - mix espec
 notifications:
   recipients:
     - anton.mishchuk@gmail.com

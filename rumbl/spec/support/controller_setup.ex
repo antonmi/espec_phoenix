@@ -4,7 +4,7 @@ defmodule ControllerSetup do
   def setup(_controller, opts) do
     if username = opts[:login_as] do
       user = insert_user(username: username)
-      conn = assign(init_conn(), :current_user, user)
+      conn = assign(build_conn(), :current_user, user)
       {:shared, conn: conn}
     else
       {:shared, []}
