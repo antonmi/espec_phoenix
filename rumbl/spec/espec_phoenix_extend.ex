@@ -1,5 +1,4 @@
 defmodule ESpec.Phoenix.Extend do
-
   def model do
     quote do
       alias Rumbl.Repo
@@ -30,7 +29,6 @@ defmodule ESpec.Phoenix.Extend do
       import Rumbl.Router.Helpers
     end
   end
-
 
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
