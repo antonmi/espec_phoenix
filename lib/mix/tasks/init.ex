@@ -18,10 +18,8 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   @phoenix_helper "phoenix_helper.exs"
   @espec_phoenix_extend "espec_phoenix_extend.ex"
 
-  def run(args) do
-    {opts, _, _} = OptionParser.parse(args)
+  def run(_args) do
     app = Mix.Phoenix.base
-
     create_files(app)
   end
 
@@ -35,7 +33,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   Ecto.Adapters.SQL.Sandbox.mode(Rumbl.Repo, :manual)
   """
-  
+
   embed_template :espec_phoenix_extend, """
   defmodule ESpec.Phoenix.Extend do
     def model do
