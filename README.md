@@ -1,24 +1,21 @@
-# ESpecPhoenix
+# ESpec.Phoenix
 [![Build Status](https://travis-ci.org/antonmi/espec.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
 
-### Warning! The next version of ESpecPhoenix will be completely redesigned and not compatible with previous versions.
-### The first reason is to make ESpecPhoenix follow Phoenix way, not Rails as it is now.
-### The second reason is to make a lightweight wrapper around ESpec which can be compatible with Phoenix helpers, and also be easy to extend.
-### Stay tuned! Coming soon!
-
-##### ESpec helpers and matchers for Phoenix web framework.
+##### ESpec helpers for Phoenix web framework.
 Read about ESpec [here](https://github.com/antonmi/espec).
 
-Read the Paulo A Pereira [post](https://onfido.com/blog/elixir-bdd/).
+ESpec.Phoenix is a lightweight wrapper around ESpec which brings BDD to Phoenix web framework.
 
-See [test_app/spec](https://github.com/antonmi/espec_phoenix/tree/master/test_app/spec) for usage examples.
+Use ESpec.Phoenix the same way as ExUnit in you Phoenix application.
+
+See [rumbl/spec](https://github.com/antonmi/espec_phoenix/tree/master/rumbl/spec) for usage examples.
 
 ## Contents
 - [Installation](#installation)
 - [Model specs](#model-specs)
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
-- [Requests specs](#requests-specs)
+- [Extensions](#extensions)
 - [Contributing](#contributing)
 
 ## Installation
@@ -28,7 +25,7 @@ Add `espec_phoenix` to dependencies in the `mix.exs` file:
 ```elixir
 def deps do
   ...
-  {:espec_phoenix, "~> 0.3.0", only: :test, app: false},
+  {:espec_phoenix, "~> 0.5.0", only: :test, app: false},
   #{:espec_phoenix, github: "antonmi/espec_phoenix", only: :test, app: false}, to get the latest version
   ...
 end
@@ -49,15 +46,14 @@ Run:
 ```sh
 MIX_ENV=test mix espec.init
 ```
-The task creates `spec/spec_helper.exs` and `spec/example_spec.exs`.
+The task creates `spec/spec_helper.exs` file.
 Run:
 ```sh
 MIX_ENV=test mix espec_phoenix.init
 ```
-The task creates `phoenix_helper.exs`, `espec_phoenix_extend.ex`, and basic specs folders and places simple examples there.
+The task creates `phoenix_helper.exs` and `espec_phoenix_extend.ex`.
 
 `phoenix_helper.exs` has Phoenix related configurations.
-Replace `App.Repo` with your repo module.
 
 You must require this helper in your `spec_helper.exs`:
 ```elixir
@@ -68,175 +64,187 @@ Also you need to checkout your `Ecto` sandbox mode before each example and check
 #require phoenix_helper.exs
 Code.require_file("#{__DIR__}/phoenix_helper.exs")
 
-ESpec.start
-
 ESpec.configure fn(config) ->
-  config.before fn ->
-    Ecto.Adapters.SQL.Sandbox.checkout(App.Repo, [])
+  config.before fn(_tags) ->
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(YourApp.Repo)
   end
 
   config.finally fn(_shared) ->
-    Ecto.Adapters.SQL.Sandbox.checkin(App.Repo, [])
+    Ecto.Adapters.SQL.Sandbox.checkin(YourApp.Repo, [])
   end
 end
 ```
 The `espec_phoenix_extend.ex` file contains `ESpec.Phoenix.Extend` module.
-Use this module to import or alias additional modules to your specs.
+Use this module to import or alias additional modules in your specs.
 
 ## Model specs
-### Example
+Use 'model' tag to identify model specs:
 ```elixir
-defmodule App.UserSpec do
-  use ESpec.Phoenix, model: App.User
-  alias App.User
-
-  let :valid_attrs, do: %{age: 42, name: "some content"}
-  let :invalid_attrs, do: %{}
-
-  context "valid changeset" do
-    subject do: User.changeset(%User{}, valid_attrs)
-    it do: should be_valid
+use ESpec.Phoenix, model: YourModel
+```
+What ESpec.Phoenix does behind the scene is the following:
+1. Uses `ModelHelpers`.
+```elixir
+defmodule ModelHelpers do
+  defmacro __using__(_args) do
+    quote do
+      import Ecto
+      import Ecto.Changeset, except: [change: 1, change: 2]
+      import Ecto.Query
+    end
   end
 end
 ```
-#### Changeset helpers
+2. Calls `ESpec.Phoenix.Extend.model` function extending your spec module.
+
+#### Note! We don't import `change/1` and `change/2` functions from `Ecto.Changeset` because they conflicts with ESpec functions. If you want to use them, call them directly with module prefix (`Ecto.Changeset.change`).
+
+### Model spec example:
 ```elixir
-expect changeset |> to be_valid
-... have_errors :name
-... have_errors [:name, :surname]
-... have_errors name: "can't be blank", surname: "can't be blank"
+defmodule Rumbl.UserSpec do
+  use ESpec.Phoenix, model: User, async: true
+  alias Rumbl.User
 
-```
+  @valid_attrs %{name: "A User", username: "eva", password: "secret"}
+  @invalid_attrs %{}
 
-## Controller specs
-There is the `action/2` helper function wich call controller functions directy.
-### Example
-```elixir
-defmodule App.UserControllerSpec do
-  use ESpec.Phoenix, controller: App.UserController
-  alias App.User
-
-  describe "show" do
-    let :user, do: %User{id: 1, age: 25, name: "Jim"}
-
-    before do
-      allow Repo |> to accept(:get, fn
-        User, 1 -> user
-        User, id -> passthrough([id])
-      end)
+  context "validation" do
+    it "checks changeset with valid attributes" do
+      changeset = User.changeset(%User{}, @valid_attrs)
+      assert changeset.valid?
     end
 
-    subject do: action(:show, %{"id" => 1})
-
-    it do: should be_successful
-    it do: should render_template("show.html")
-    it do: should have_in_assigns(user: user)
+    it "checks changeset with long username" do
+      attrs = Map.put(@valid_attrs, :username, String.duplicate("a", 30))
+      assert {:username, "should be at most 20 character(s)"} in
+             errors_on(%User{}, attrs)
+    end
   end
 end
 ```
+It is a good practice to place specs with side effects (db access) to another module:
+```elixir
+defmodule Rumbl.UserRepoSpec do
+  use ESpec.Phoenix, model: User, async: true
+  alias Rumbl.User
 
-#### Conn helpers
-##### Check status
-```elixir
-expect res_conn |> to be_successful  #or be_success
-... be_redirection                   #be_redirect
-... be_not_found                     #be_missing
-... be_server_error                  #be_error
+  @valid_attrs %{name: "A User", username: "eva"}
 
-... have_http_status code
-... redirect_to user_path(conn, :index)
+  describe "converting unique_constraint on username to error" do
+    before do: insert_user(username: "eric")
+    let :changeset do
+      attrs = Map.put(@valid_attrs, :username, "eric")
+      User.changeset(%User{}, attrs)
+    end
+
+    it do: expect(Repo.insert(changeset)).to be_error_result
+
+    context "when name has been already taken" do
+      let :new_changeset do
+        {:error, changeset} = Repo.insert(changeset)
+        changeset
+      end
+
+      it "has error" do
+        error = {:username, {"has already been taken", []}}
+        expect(new_changeset.errors).to have(error)
+      end
+    end
+  end
+end  
 ```
-##### Check template and view
+## Controller specs
+Controller specs are integration tests that tests interactions among all parts of your application.
+Use 'controller' tag to identify controller specs:
 ```elixir
-expect res_conn |> to(render_template "index.html")
-... use_view App.UserView
+use ESpec.Phoenix, controller: YourController
 ```
-##### Check assigns
+Your module will be extended with `ESpec.Phoenix.ModelHelpers` and also with `ESpec.Phoenix.ControllerHelpers`:
 ```elixir
-expect res_conn |> to(have_in_assigns :users)
-... have_in_assigns [:users, :options]
-... have_in_assigns users: users, options: options
+defmodule ControllerHelpers do
+  defmacro __using__(_args) do
+    quote do
+      import Plug.Conn
+      import Phoenix.ConnTest, except: [conn: 0, build_conn: 0]
+
+      def build_conn, do: Phoenix.ConnTest.build_conn()
+    end
+  end
+end
 ```
-##### Check flash
+#### Note! Deprecated Phoenix.ConnTest.conn/0 function is not imported.
+Below is an example of controller specs:
 ```elixir
-expect res_conn |> to(have_in_flash :info)
-... have_in_flash info: "User created successfully."
+defmodule Rumbl.VideoControllerTest do
+  use ESpec.Phoenix, controller: VideoController, async: true
+
+  describe "with logged user" do
+    let :user, do: insert_user(username: "max")
+    let! :user_video, do: insert_video(user, title: "funny cats")
+    let! :other_video, do: insert_video(insert_user(username: "other"), title: "another video")
+
+    let :response do
+      assign(build_conn, :current_user, user)
+      |> get(video_path(build_conn, :index))
+    end
+
+    it "lists all user's videos on index" do
+      expect(html_response(response, 200)).to match(~r/Listing videos/)
+    end
+
+    it "has user_video title" do
+      expect(response.resp_body).to have(user_video.title)
+    end
+
+    it "does not have other_video title" do
+      expect(response.resp_body).not_to have(other_video.title)
+    end
+  end
+end  
 ```
 ## View specs
-There is the `render/2` helper function available in the view specs.
+View specs also are extended with `ESpec.Phoenix.ControllerHelpers` and also imports `Phoenix.View`.
 ### Example
 ```elixir
-defmodule App.UserViewsSpec do
-  use ESpec.Phoenix, view: App.UserView
-  alias App.User
+defmodule Rumbl.VideoViewSpec do
+  use ESpec.Phoenix, async: true, view: VideoView
 
-  describe "show" do
-    let :user, do: %User{id: 1, age: 25, name: "Jim"}
-    subject do: render("show.html", user: user)
-
-    it do: should have_text("Show user")
-    it do: should have_text_in("ul li", user.name)
-    it do: should have_text_in("ul li", user.age)
-    it do: should have_attribute_in("a", href: user_path(conn, :index))
+  let :videos do
+    [%Rumbl.Video{id: "1", title: "dogs"},
+      %Rumbl.Video{id: "2", title: "cats"}]
   end
-end
-```
-ESpec.Phoenix uses [Floki](https://github.com/philss/floki) to parse html.
-There are some mathers for html string or for `conn` structure.
-#### Content helpers
-##### Check presence of plain text
-```elixir
-expect html |> to(have_text "some text")    #String.contains?(html, "some text")
-... have_content "some text"
-```
-##### Check presence of some selector
-```elixir
-expect html |> to(have_selector "input #user_name")   #Floki.find(html, "input #user_name")
-```
 
-##### Check text in the selector
-```elixir
-expect html |> to(have_text_in "label", "Name")
-```
-##### Check attributes in the selector
-```elixir
-expect html |> to(have_attributes_in "form", action: "/users", method: "post")
-```
-## Requests specs
-Requests specs tests request/response cycles from end to end using a black box approach.
-Functions for corresponding http methods are imported from `Phoenix.ConnTest`.
-Both 'Conn helpers' and 'Content helpers' available.
-### Example
-```elixir
-defmodule App.UserRequestsSpec do
-  use ESpec.Phoenix, request: App.Endpoint
-  alias App.User
-
-  describe "list user" do
-    before do
-      {:ok, user1} = %User{name: "Bill", age: 25} |> Repo.insert
-      {:ok, user2} = %User{name: "Jonh", age: 26} |> Repo.insert
-      {:shared, user1: user1, user2: user2}
+  describe "index.html" do
+    let :content do
+      render_to_string(Rumbl.VideoView, "index.html", conn: build_conn, videos: videos)
     end
 
-    subject! do: get(conn(), user_path(conn(), :index))
+    it do: expect(content).to have("Listing videos")
 
-    it do: should be_successful
-
-    it "checks content" do
-      should have_content shared.user1.name
-      should have_content shared.user2.name
+    it "has video titles" do
+      for video <- videos do
+        expect(content).to have(video.title)
+      end
     end
   end
-end
+end  
 ```
 
 ## Extensions
-
 [test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
 
 ## Contributing
-There is a [test_app](https://github.com/antonmi/espec_phoenix/tree/master/test_app) with specs inside.
-Run `mix deps.get` in `test_app` folder.
+##### Contributions are welcome and appreciated!
+
+Request a new feature by creating an issue.
+
+Create a pull request with new features or fixes.
+
+To run specs:
+```sh
+mix espec
+```
+There is a [rumbl application](https://github.com/antonmi/espec_phoenix/tree/master/rumbl) with specs inside.
+Run `mix deps.get` in `rumbl` folder.
 Change database settings in `test_app/config/test.exs`.
-Run tests with `mix espec`
+Run tests with `mix test` and `mix espec`.

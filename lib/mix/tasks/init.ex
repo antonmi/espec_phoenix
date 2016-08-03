@@ -24,14 +24,14 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   end
 
   defp create_files(app) do
-    create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(nil))
+    create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(app: app))
     create_file(Path.join(@spec_folder, @espec_phoenix_extend), espec_phoenix_extend_template(app: app))
   end
 
   embed_template :phoenix_helper, """
   Code.require_file("spec/espec_phoenix_extend.ex")
 
-  Ecto.Adapters.SQL.Sandbox.mode(Rumbl.Repo, :manual)
+  Ecto.Adapters.SQL.Sandbox.mode(<%= @app %>.Repo, :manual)
   """
 
   embed_template :espec_phoenix_extend, """

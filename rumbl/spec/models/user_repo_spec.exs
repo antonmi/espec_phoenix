@@ -1,4 +1,4 @@
-defmodule Rumbl.UserRepoTest do
+defmodule Rumbl.UserRepoSpec do
   use ESpec.Phoenix, async: true, model: User
   alias Rumbl.User
   alias Rumbl.Category

@@ -6,7 +6,6 @@ defmodule Rumbl.VideoViewSpec do
       %Rumbl.Video{id: "2", title: "cats"}]
   end
 
-
   describe "index.html" do
     let :content do
       render_to_string(Rumbl.VideoView, "index.html", conn: build_conn, videos: videos)
@@ -22,7 +21,6 @@ defmodule Rumbl.VideoViewSpec do
   end
 
   describe "new.html" do
-
     let :content do
       changeset = Rumbl.Video.changeset(%Rumbl.Video{})
       categories = [{"cats", 123}]

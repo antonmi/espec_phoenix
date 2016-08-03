@@ -33,7 +33,7 @@ defmodule ESpecPhoenixInitSpec do
 
     it "sets sandbox moded" do
       expect(content)
-      |> to( have "Ecto.Adapters.SQL.Sandbox.mode(Rumbl.Repo, :manual)")
+      |> to( have "Ecto.Adapters.SQL.Sandbox.mode(EspecPhoenix.Repo, :manual)")
     end
   end
 
