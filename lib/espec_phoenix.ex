@@ -1,73 +1,60 @@
 defmodule ESpec.Phoenix do
   defmacro __using__(args) do
-    use_async = case Keyword.has_key?( args, :async ) do
-                  true -> Keyword.get( args, :async )
-                  _    -> false
-                end
-
     cond do
       Keyword.has_key?(args, :model) ->
         quote do
-          use ESpec, async: unquote(use_async)
+          use ESpec, unquote(args)
           @model Keyword.get(unquote(args), :model)
 
-          import Ecto.Model
-          import Ecto.Query, only: [from: 2]
-
-          import ESpec.Phoenix.Assertions.Changeset.Helpers
+          use ESpec.Phoenix.ModelHelpers
 
           use ESpec.Phoenix.Extend, :model
         end
 
       Keyword.has_key?(args, :controller) ->
         quote do
-          use ESpec, async: unquote(use_async)
+          use ESpec, unquote(args)
           @controller Keyword.get(unquote(args), :controller)
 
-          use Phoenix.ConnTest
-
-          use ESpec.Phoenix.Controllers.Helpers
-          import ESpec.Phoenix.Assertions.Conn.Helpers
+          use ESpec.Phoenix.ModelHelpers
+          use ESpec.Phoenix.ControllerHelpers
 
           use ESpec.Phoenix.Extend, :controller
         end
 
-      Keyword.has_key?(args, :request) ->
-        quote do
-          use ESpec, async: unquote(use_async)
-          @endpoint Keyword.get(unquote(args), :request)
-
-          import ESpec.Phoenix.Assertions.Content.Helpers
-          use Phoenix.ConnTest
-          import ESpec.Phoenix.Assertions.Conn.Helpers
-
-          import Ecto.Model
-          import Ecto.Query, only: [from: 2]
-
-          use ESpec.Phoenix.Extend, :request
-        end
-
-      Keyword.has_key?(args, :router) ->
-        quote do
-          use ESpec, async: unquote(use_async)
-          @router Keyword.get(unquote(args), :router)
-          use ESpec.Phoenix.Extend, :router
-        end
-
       Keyword.has_key?(args, :view) ->
         quote do
-          use ESpec, async: unquote(use_async)
+          use ESpec, unquote(args)
           @view Keyword.get(unquote(args), :view)
 
-          use Phoenix.ConnTest
+          use ESpec.Phoenix.ControllerHelpers
 
-          import ESpec.Phoenix.Assertions.Content.Helpers
-          use ESpec.Phoenix.Views.Helpers
-
+          import Phoenix.View
           use ESpec.Phoenix.Extend, :view
         end
 
-        true -> :ok
+      true -> :ok
+    end
+  end
+
+  defmodule ModelHelpers do
+    defmacro __using__(_args) do
+      quote do
+        import Ecto
+        import Ecto.Changeset, except: [change: 1, change: 2]
+        import Ecto.Query
+      end
+    end
+  end
+
+  defmodule ControllerHelpers do
+    defmacro __using__(_args) do
+      quote do
+        import Plug.Conn
+        import Phoenix.ConnTest, except: [conn: 0, build_conn: 0]
+
+        def build_conn, do: Phoenix.ConnTest.build_conn()
+      end
     end
   end
 end

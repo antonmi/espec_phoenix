@@ -1,26 +1,24 @@
 language: elixir
 elixir:
-  - 1.2.3
+  - 1.2.6
   - 1.3.0
+  - 1.3.2
 otp_release:
-  - 18.0
   - 18.2
   - 19.0
 sudo: false
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd test_app
+  - cd rumbl
   - cat config/database.config >> config/test.exs
+  - cd ..
 script:
   - mix deps.get
+  - mix espec
+  - cd rumbl
+  - mix deps.get
   - mix test
-  - mix espec --silent
+  - mix espec
 notifications:
   recipients:
     - anton.mishchuk@gmail.com
-matrix:
-  exclude:
-    - elixir: 1.1.1
-      otp_release: 19.0
-    - elixir: 1.2.3
-      otp_release: 19.0
