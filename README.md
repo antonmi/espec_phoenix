@@ -3,6 +3,8 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/espec.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
 
 ##### ESpec helpers for Phoenix web framework.
+##### Note! Version 0.5.0 is not compatible with previous versions!
+
 Read about ESpec [here](https://github.com/antonmi/espec).
 
 ESpec.Phoenix is a lightweight wrapper around ESpec which brings BDD to Phoenix web framework.
