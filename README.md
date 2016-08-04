@@ -86,7 +86,7 @@ Use this module to import or alias additional modules in your specs.
 I've decided to remove all the custom assertions for 'changeset', 'conn' and 'content'.
 The reason is to make specs more explicit like people used to see using ExUnit.
 
-You can easy copy/past previous functionality from 'old' branch. There are two ways:
+You can easy copy/paste previous functionality from 'old' branch. There are two ways:
 - Copy old-version assertions from `lib/assertions` with minimal changes.
 - Explicitly assert what you want in your specs.
 
