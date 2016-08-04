@@ -15,6 +15,7 @@ See [rumbl/spec](https://github.com/antonmi/espec_phoenix/tree/master/rumbl/spec
 
 ## Contents
 - [Installation](#installation)
+- [Migration from previous versions](#migration-from-previous-versions)
 - [Model specs](#model-specs)
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
@@ -79,6 +80,17 @@ end
 ```
 The `espec_phoenix_extend.ex` file contains `ESpec.Phoenix.Extend` module.
 Use this module to import or alias additional modules in your specs.
+
+## Migration from previous versions
+### There is no other matchers and helpers then ESpec and Phoenix have.
+I've decided to remove all the custom assertions for 'changeset', 'conn' and 'content'.
+The reason is to make specs more explicit like people used to see using ExUnit.
+
+You can easy copy/past previous functionality from 'old' branch. There are two ways:
+- Copy old-version assertions from `lib/assertions` with minimal changes.
+- Explicitly assert what you want in your specs.
+
+#### Hint! One can place old-version assertions to its own project and add it to the [Extensions](#extensions) section.
 
 ## Model specs
 Use 'model' tag to identify model specs:
