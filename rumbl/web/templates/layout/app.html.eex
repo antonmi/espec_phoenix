@@ -17,6 +17,7 @@
         <ol class="breadcrumb text-right">
           <%= if @current_user do %>
             <li><%= @current_user.username %></li>
+            <li><%= link "My Videos", to: video_path(@conn, :index) %></li>
             <li>
               <%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
             </li>
@@ -36,6 +37,7 @@
       </main>
 
     </div> <!-- /container -->
+    <script>window.userToken = "<%= assigns[:user_token] %>"</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
