@@ -4,13 +4,16 @@ defmodule Rumbl.Mixfile do
   def project do
     [app: :rumbl,
      version: "0.0.1",
+     build_path: "../../_build",
+     config_path: "../../config/config.exs",
+     deps_path: "../../deps",
+     lockfile: "../../mix.lock",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
-     preferred_cli_env: [espec: :test],
      deps: deps()]
   end
 
@@ -20,7 +23,7 @@ defmodule Rumbl.Mixfile do
   def application do
     [mod: {Rumbl, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :info_sys]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,8 +44,7 @@ defmodule Rumbl.Mixfile do
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 2.5"},
      {:cowboy, "~> 1.0"},
-     {:sweet_xml, "~> 0.6.1"},
-     {:espec_phoenix, "~> 0.8.26", path: "..", only: :test, app: false}
+     {:info_sys, in_umbrella: true}
       ]
   end
 
