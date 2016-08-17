@@ -9,13 +9,13 @@ otp_release:
 sudo: false
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - cd rumbl
+  - cd rumbrella/apps/rumbl
   - cat config/database.config >> config/test.exs
-  - cd ..
+  - cd ../../..
 script:
   - mix deps.get
   - mix espec
-  - cd rumbl
+  - cd rumbrella
   - mix deps.get
   - mix test
   - mix espec
