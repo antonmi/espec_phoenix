@@ -19,7 +19,6 @@ defmodule Rumbl.User do
     |> unique_constraint(:username)
   end
 
-
   def registration_changeset(model, params) do
     model
     |> changeset(params)

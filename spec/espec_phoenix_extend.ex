@@ -11,6 +11,10 @@ defmodule ESpec.Phoenix.Extend do
     def controller_helper_fun, do: :fun
   end
 
+  defmodule ChannelHelpers do
+    def channel_helper_fun, do: :fun
+  end
+
   def model do
     quote do
       import ModelHelpers
@@ -26,6 +30,12 @@ defmodule ESpec.Phoenix.Extend do
   def view do
     quote do
       import ViewHelpers
+    end
+  end
+
+  def channel do
+    quote do
+      import ChannelHelpers
     end
   end
 

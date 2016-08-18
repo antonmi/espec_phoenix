@@ -19,7 +19,6 @@ defmodule ESpec.Phoenix.Extend do
       import Rumbl.Router.Helpers
       import Rumbl.TestHelpers
 
-      # The default endpoint for testing
       @endpoint Rumbl.Endpoint
     end
   end
@@ -27,6 +26,16 @@ defmodule ESpec.Phoenix.Extend do
   def view do
     quote do
       import Rumbl.Router.Helpers
+    end
+  end
+
+  def channel do
+    quote do
+      alias Rumbl.Repo
+
+      import Rumbl.TestHelpers
+
+      @endpoint Rumbl.Endpoint
     end
   end
 
