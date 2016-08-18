@@ -47,7 +47,6 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
         alias <%= @app %>
         import <%= @app %>.Router.Helpers
 
-        # The default endpoint for testing
         @endpoint <%= @app %>.Endpoint
       end
     end
@@ -55,6 +54,14 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     def view do
       quote do
         import <%= @app %>.Router.Helpers
+      end
+    end
+
+    def channel do
+      quote do
+        alias <%= @app %>.Repo
+
+        @endpoint <%= @app %>.Endpoint
       end
     end
 

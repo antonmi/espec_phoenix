@@ -33,6 +33,17 @@ defmodule ESpec.Phoenix do
           use ESpec.Phoenix.Extend, :view
         end
 
+      Keyword.has_key?(args, :channel) ->
+        quote do
+          use ESpec, unquote(args)
+          @channel Keyword.get(unquote(args), :channel)
+
+          use Phoenix.ChannelTest
+          use ESpec.Phoenix.ModelHelpers
+
+          use ESpec.Phoenix.Extend, :channel
+        end
+
       true -> :ok
     end
   end

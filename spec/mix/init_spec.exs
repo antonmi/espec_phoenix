@@ -40,9 +40,8 @@ defmodule ESpecPhoenixInitSpec do
   describe "espec_phoenix_extend" do
     let :file, do: "spec/espec_phoenix_extend.ex"
 
-    before do
-      Code.require_file(file)
-    end
+    before do: Code.require_file(file)
+
     it "check files" do
       expect(File.regular?(Path.join(@tmp_path, file))).to be_true
     end
@@ -60,6 +59,11 @@ defmodule ESpecPhoenixInitSpec do
     it "defines view section" do
       expect(content)
       |> to(have "def view do")
+    end
+
+    it "defines channel section" do
+      expect(content)
+      |> to(have "def channel do")
     end
 
     it "substitutes app" do

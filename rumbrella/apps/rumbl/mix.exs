@@ -13,6 +13,7 @@ defmodule Rumbl.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     preferred_cli_env: [espec: :test],
      aliases: aliases(),
      deps: deps()]
   end
@@ -36,7 +37,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2.0"},
      {:phoenix_pubsub, "~> 1.0"},
-     {:ecto, "2.0.2"},
+     {:ecto, "2.0.4"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
@@ -44,7 +45,8 @@ defmodule Rumbl.Mixfile do
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 2.5"},
      {:cowboy, "~> 1.0"},
-     {:info_sys, in_umbrella: true}
+     {:info_sys, in_umbrella: true},
+     {:espec_phoenix, "~> 0.5.0", path: "../../..", only: :test, app: false}
       ]
   end
 

@@ -1,5 +1,6 @@
 Code.require_file("spec/phoenix_helper.exs")
 Code.require_file("spec/support/controller_setup.ex")
+Code.require_file "../../info_sys/test/backends/http_client.exs", __DIR__
 
 ESpec.configure fn(config) ->
   config.before fn(tags) ->

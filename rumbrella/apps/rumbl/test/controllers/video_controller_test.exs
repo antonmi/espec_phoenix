@@ -25,7 +25,7 @@ defmodule Rumbl.VideoControllerTest do
       assert conn.halted
     end)
   end
-  
+
   test "lists all user's videos on index" do
     user = insert_user(username: "max")
     conn = assign(build_conn, :current_user, user)

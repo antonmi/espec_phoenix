@@ -11,7 +11,7 @@ ESpec.Phoenix is a lightweight wrapper around ESpec which brings BDD to Phoenix 
 
 Use ESpec.Phoenix the same way as ExUnit in you Phoenix application.
 
-See [rumbl/spec](https://github.com/antonmi/espec_phoenix/tree/master/rumbl/spec) for usage examples.
+There is [rumbrella](https://github.com/antonmi/espec_phoenix/tree/master/rumbrella) project from great [Programming Phoenix](https://pragprog.com/book/phoenix/programming-phoenix) book. One can find a lot of usefull examples there!
 
 ## Contents
 - [Installation](#installation)
@@ -19,6 +19,7 @@ See [rumbl/spec](https://github.com/antonmi/espec_phoenix/tree/master/rumbl/spec
 - [Model specs](#model-specs)
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
+- [Channel specs](#channel-specs)
 - [Extensions](#extensions)
 - [Contributing](#contributing)
 
@@ -244,7 +245,44 @@ defmodule Rumbl.VideoViewSpec do
   end
 end  
 ```
+## Channel specs
+Channel specs uses `Phoenix.ChannelTest` and `ESpec.Phoenix.ModelsHelpers`.
+### Example
+```elixir
+defmodule Rumbl.Channels.VideoChannelSpec do
+  use ESpec.Phoenix, channel: Rumbl.VideoChannel
 
+  before do
+    Ecto.Adapters.SQL.Sandbox.mode(Rumbl.Repo, {:shared, self()})
+  end
+
+  let! :user, do: insert_user(name: "Rebecca")
+  let! :video, do: insert_video(user, title: "Testing")
+
+  before do
+    token = Phoenix.Token.sign(@endpoint, "user socket", user.id)
+    {:ok, socket} = connect(Rumbl.UserSocket, %{"token" => token})
+
+    {:shared, socket: socket}
+  end
+
+  before do
+    for body <- ~w(one two) do
+      video
+      |> build_assoc(:annotations, %{body: body})
+      |> Repo.insert!()
+    end
+  end
+
+  before do
+    {:ok, reply, socket} = subscribe_and_join(shared[:socket], "videos:#{video.id}", %{})
+    {:shared, reply: reply, socket: socket}
+  end
+
+  it do: expect shared[:socket].assigns.video_id |> to(eq video.id)
+  it do: assert %{annotations: [%{body: "one"}, %{body: "two"}]} = shared[:reply]
+end
+```
 ## Extensions
 [test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
 
