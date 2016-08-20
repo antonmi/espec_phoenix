@@ -246,7 +246,11 @@ defmodule Rumbl.VideoViewSpec do
 end  
 ```
 ## Channel specs
+```elixir
+use ESpec.Phoenix, channel: YourChannel
+```
 Channel specs uses `Phoenix.ChannelTest` and `ESpec.Phoenix.ModelsHelpers`.
+Use 'model' tag to identify model specs:
 ### Example
 ```elixir
 defmodule Rumbl.Channels.VideoChannelSpec do
