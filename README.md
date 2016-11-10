@@ -190,7 +190,7 @@ end
 #### Note! Deprecated Phoenix.ConnTest.conn/0 function is not imported.
 Below is an example of controller specs:
 ```elixir
-defmodule Rumbl.VideoControllerTest do
+defmodule Rumbl.VideoControllerSpec do
   use ESpec.Phoenix, controller: VideoController, async: true
 
   describe "with logged user" do
@@ -216,6 +216,24 @@ defmodule Rumbl.VideoControllerTest do
     end
   end
 end  
+```
+Please note that due to the fact it's integraton tests, you can actually use it without specifying controller:
+```
+defmodule Rumbl.VideoControllerRequestSpec do
+  use ESpec.Phoenix, controller: true
+
+  describe "with logged user" do
+    let! :user_video, do: insert_video(user, title: "funny cats")
+    
+    let :response do
+      build_conn |> get("/videos")
+    end
+
+    it "lists all user's videos on index" do
+      expect(response.resp_body).to match(~r/Listing videos/)
+    end
+  end
+end
 ```
 ## View specs
 View specs also are extended with `ESpec.Phoenix.ControllerHelpers` and also imports `Phoenix.View`.
