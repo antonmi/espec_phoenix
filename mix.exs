@@ -31,7 +31,9 @@ defmodule EspecPhoenix.Mixfile do
       {:espec, ">= 1.1.0"},
       {:phoenix, ">= 1.0.0"},
       {:ecto, ">= 1.0.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:credo, "~> 0.4", only: :dev},
     ]
   end
 

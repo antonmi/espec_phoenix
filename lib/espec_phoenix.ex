@@ -1,4 +1,9 @@
 defmodule ESpec.Phoenix do
+  @moduledoc """
+  ESpec Phoenix basic module. Imports core ESpec plus some Phoenix-related components.
+  One should `use` the module in spec modules.
+  """
+
   defmacro __using__(args) do
     cond do
       Keyword.has_key?(args, :model) ->
@@ -49,6 +54,8 @@ defmodule ESpec.Phoenix do
   end
 
   defmodule ModelHelpers do
+    @moduledoc false
+
     defmacro __using__(_args) do
       quote do
         import Ecto
@@ -59,6 +66,8 @@ defmodule ESpec.Phoenix do
   end
 
   defmodule ControllerHelpers do
+    @moduledoc false
+
     defmacro __using__(_args) do
       quote do
         import Plug.Conn
