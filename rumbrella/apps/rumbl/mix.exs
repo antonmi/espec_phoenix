@@ -37,7 +37,7 @@ defmodule Rumbl.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2.0"},
      {:phoenix_pubsub, "~> 1.0"},
-     {:ecto, "2.0.4"},
+     {:ecto, "2.0.5"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.6"},
@@ -46,7 +46,7 @@ defmodule Rumbl.Mixfile do
      {:comeonin, "~> 2.5"},
      {:cowboy, "~> 1.0"},
      {:info_sys, in_umbrella: true},
-     {:espec_phoenix, "~> 0.5.0", path: "../../..", only: :test, app: false}
+     {:espec_phoenix, "~> 0.6.2", path: "../../..", only: :test, app: false}
       ]
   end
 
