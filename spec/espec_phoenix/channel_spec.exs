@@ -61,7 +61,7 @@ defmodule ChannelSpec do
 
   describe "imports from ESpec.Phoenix.Extend" do
     it "calls function from ChannelHelpers" do
-      expect(channel_helper_fun).to eq(:fun)
+      expect(channel_helper_fun()).to eq(:fun)
     end
   end
 end

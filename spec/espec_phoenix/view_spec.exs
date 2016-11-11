@@ -49,7 +49,7 @@ defmodule ViewSpec do
 
   describe "imports from ESpec.Phoenix.Extend" do
     it "calls function from ModelHelpers" do
-      expect(view_helper_fun).to eq(:fun)
+      expect(view_helper_fun()).to eq(:fun)
     end
   end
 end

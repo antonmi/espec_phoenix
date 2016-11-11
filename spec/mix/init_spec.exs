@@ -13,7 +13,7 @@ defmodule ESpecPhoenixInitSpec do
   finally do: File.rm_rf! @tmp_path
 
   before do
-    {:ok, content} = File.read(Path.join(@tmp_path, file))
+    {:ok, content} = File.read(Path.join(@tmp_path, file()))
     {:shared, content: content}
   end
 
@@ -23,16 +23,16 @@ defmodule ESpecPhoenixInitSpec do
     let :file, do: "spec/phoenix_helper.exs"
 
     it "check files" do
-      expect(File.regular?(Path.join(@tmp_path, file))).to be_true
+      expect(File.regular?(Path.join(@tmp_path, file()))).to be_true()
     end
 
     it "requires espec_phoenix_extend" do
-      expect(content)
+      expect(content())
       |> to( have "Code.require_file(\"spec/espec_phoenix_extend.ex\")")
     end
 
     it "sets sandbox moded" do
-      expect(content)
+      expect(content())
       |> to( have "Ecto.Adapters.SQL.Sandbox.mode(EspecPhoenix.Repo, :manual)")
     end
   end
@@ -40,39 +40,39 @@ defmodule ESpecPhoenixInitSpec do
   describe "espec_phoenix_extend" do
     let :file, do: "spec/espec_phoenix_extend.ex"
 
-    before do: Code.require_file(file)
+    before do: Code.require_file(file())
 
     it "check files" do
-      expect(File.regular?(Path.join(@tmp_path, file))).to be_true
+      expect(File.regular?(Path.join(@tmp_path, file()))).to be_true()
     end
 
     it "defines model section" do
-      expect(content)
+      expect(content())
       |> to(have "def model do")
     end
 
     it "defines controller section" do
-      expect(content)
+      expect(content())
       |> to(have "def controller do")
     end
 
     it "defines view section" do
-      expect(content)
+      expect(content())
       |> to(have "def view do")
     end
 
     it "defines channel section" do
-      expect(content)
+      expect(content())
       |> to(have "def channel do")
     end
 
     it "substitutes app" do
-      expect(content)
+      expect(content())
       |> to(have "alias EspecPhoenix.Repo")
     end
 
     it "sets @endpoint" do
-      expect(content)
+      expect(content())
       |> to(have "@endpoint EspecPhoenix.Endpoint")
     end
   end

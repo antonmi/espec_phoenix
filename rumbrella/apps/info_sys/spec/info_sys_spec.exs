@@ -22,23 +22,23 @@ defmodule InfoSysSpec do
   end
 
   describe "&compute/2" do
-    let :result, do: InfoSys.compute(query, backends: [TestBackend])
+    let :result, do: InfoSys.compute(query(), backends: [TestBackend])
 
     context "with result" do
       let :query, do: "result"
-      it do: expect result |> to(eq [%Result{backend: "test", text: "result"}])
+      it do: expect result() |> to(eq [%Result{backend: "test", text: "result"}])
     end
 
     context "with no result" do
       let :query, do: "none"
-      it do: expect result |> to(eq [])
+      it do: expect result() |> to(eq [])
     end
 
     context "with timeout" do
-      let! :result, do: InfoSys.compute(query, backends: [TestBackend], timeout: 10)
+      let! :result, do: InfoSys.compute(query(), backends: [TestBackend], timeout: 10)
       let :query, do: "timeout"
 
-      it do: expect result |> to(eq [])
+      it do: expect result() |> to(eq [])
 
       before do
         assert_receive {:backend, backend_pid}
@@ -60,7 +60,7 @@ defmodule InfoSysSpec do
 
         it "compute/2 discards backend errors" do
           capture_log(fn ->
-            expect result |> to(eq [])
+            expect result() |> to(eq [])
             refute_received {:DOWN, _, _, _, _}
             refute_received :timedout
           end)
