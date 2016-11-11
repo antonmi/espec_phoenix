@@ -6,7 +6,7 @@ defmodule Rumbrella.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      preferred_cli_env: [espec: :test],
-     deps: deps]
+     deps: deps()]
   end
 
   # Dependencies can be Hex packages:
@@ -22,6 +22,6 @@ defmodule Rumbrella.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    [{:espec_phoenix, "~> 0.5.0", path: "..", only: :test, app: false}]
+    [{:espec_phoenix, "~> 0.6.2", path: "..", only: :test, app: false}]
   end
 end

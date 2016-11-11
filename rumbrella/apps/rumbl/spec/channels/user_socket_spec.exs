@@ -6,7 +6,7 @@ defmodule Rumbl.Channels.UserSocketSpec do
     let :token, do: Phoenix.Token.sign(@endpoint, "user socket", "123")
 
     it "assigns user_id" do
-      {:ok, socket} = connect(UserSocket, %{"token" => token})
+      {:ok, socket} = connect(UserSocket, %{"token" => token()})
       expect socket.assigns.user_id |> to(eq "123")
     end
   end

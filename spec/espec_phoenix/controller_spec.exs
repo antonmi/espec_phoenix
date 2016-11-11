@@ -81,7 +81,7 @@ defmodule ControllerSpec do
 
   describe "imports from ESpec.Phoenix.Extend" do
     it "calls function from ModelHelpers" do
-      expect(controller_helper_fun).to eq(:fun)
+      expect(controller_helper_fun()).to eq(:fun)
     end
   end
 end
