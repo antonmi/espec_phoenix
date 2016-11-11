@@ -86,11 +86,9 @@ Use this module to import or alias additional modules in your specs.
 I've decided to remove all the custom assertions for 'changeset', 'conn' and 'content'.
 The reason is to make specs more explicit like people used to see using ExUnit.
 
-You can easy copy/paste previous functionality from 'old' branch. There are two ways:
-- Copy old-version assertions from `lib/assertions` with minimal changes.
-- Explicitly assert what you want in your specs.
+If you still want to use them, check out the [espec_phoenix_helpers](https://github.com/facto/espec_phoenix_helpers) project.
 
-#### Hint! One can place old-version assertions to its own project and add it to the [Extensions](#extensions) section.
+
 
 ## Model specs
 Use 'model' tag to identify model specs:
@@ -166,7 +164,7 @@ defmodule Rumbl.UserRepoSpec do
       end
     end
   end
-end  
+end
 ```
 ## Controller specs
 Controller specs are integration tests that tests interactions among all parts of your application.
@@ -215,7 +213,7 @@ defmodule Rumbl.VideoControllerTest do
       expect(response.resp_body).not_to have(other_video.title)
     end
   end
-end  
+end
 ```
 ## View specs
 View specs also are extended with `ESpec.Phoenix.ControllerHelpers` and also imports `Phoenix.View`.
@@ -242,7 +240,7 @@ defmodule Rumbl.VideoViewSpec do
       end
     end
   end
-end  
+end
 ```
 ## Channel specs
 ```elixir
@@ -287,6 +285,7 @@ defmodule Rumbl.Channels.VideoChannelSpec do
 end
 ```
 ## Extensions
+[espec_phoenix_helpers](https://github.com/facto/espec_phoenix_helpers) - assertions and helpers that used to be part of this project but were extracted out
 [test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
 
 ## Contributing
