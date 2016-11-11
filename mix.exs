@@ -8,12 +8,11 @@ defmodule EspecPhoenix.Mixfile do
      name: "ESpec Phoenix",
      version: @version,
      elixir: "~> 1.0",
-     description: description,
-     package: package,
-     deps: deps,
+     description: description(),
+     package: package(),
+     deps: deps(),
      source_url: "https://github.com/antonmi/espec_phoenix",
-     preferred_cli_env: [espec: :test],
-     deps: deps]
+     preferred_cli_env: [espec: :test]]
   end
 
   def application do
@@ -28,7 +27,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, ">= 1.1.0"},
+      {:espec, ">= 1.1.2"},
 
       {:phoenix, ">= 1.0.0", only: [:dev, :test]},
       {:ecto, ">= 1.0.0", only: [:dev, :test]},
