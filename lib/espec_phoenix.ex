@@ -49,7 +49,10 @@ defmodule ESpec.Phoenix do
           use ESpec.Phoenix.Extend, :channel
         end
 
-      true -> :ok
+      true ->
+        quote do
+          use ESpec, unquote(args)
+        end
     end
   end
 
@@ -57,10 +60,12 @@ defmodule ESpec.Phoenix do
     @moduledoc false
 
     defmacro __using__(_args) do
-      quote do
-        import Ecto
-        import Ecto.Changeset, except: [change: 1, change: 2]
-        import Ecto.Query
+      if Code.ensure_loaded?(Ecto) do
+        quote do
+          import Ecto
+          import Ecto.Changeset, except: [change: 1, change: 2]
+          import Ecto.Query
+        end
       end
     end
   end
