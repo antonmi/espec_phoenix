@@ -22,6 +22,6 @@ defmodule Rumbrella.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    [{:espec_phoenix, "~> 0.6.3", path: "..", only: :test, app: false}]
+    [{:espec_phoenix, "~> 0.6.4", path: "..", only: :test, app: false}]
   end
 end
