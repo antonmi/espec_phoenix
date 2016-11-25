@@ -28,8 +28,8 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, ">= 1.1.2"},
+      {:phoenix, ">= 1.0.0"},
 
-      {:phoenix, ">= 1.0.0", only: [:dev, :test]},
       {:ecto, ">= 1.0.0", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:credo, "~> 0.4", only: :dev},
