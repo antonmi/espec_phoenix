@@ -39,7 +39,7 @@ defmodule InfoSys.Mixfile do
   defp deps do
     [
       {:sweet_xml, "~> 0.6.1"},
-      {:espec_phoenix, "~> 0.6.4", path: "../../..", only: :test, app: false}
+      {:espec_phoenix, "~> 0.6.5", path: "../../..", only: :test, app: false}
     ]
   end
 end
