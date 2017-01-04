@@ -1,6 +1,6 @@
 # ESpec.Phoenix
-[![Build Status](https://travis-ci.org/antonmi/espec.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
-[![Hex.pm](https://img.shields.io/hexpm/v/espec.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
+[![Build Status](https://travis-ci.org/antonmi/espec_phoenix.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
+[![Hex.pm](https://img.shields.io/hexpm/v/espec_phoenix.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
 
 ##### ESpec helpers for Phoenix web framework.
 
