@@ -20,6 +20,8 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   @espec_phoenix_extend "espec_phoenix_extend.ex"
 
   def run(_args) do
+    Mix.Tasks.Espec.Init.run([])
+
     app = Mix.Phoenix.base
     create_files(app)
     patch_espec_config

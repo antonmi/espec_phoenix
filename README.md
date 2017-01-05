@@ -46,16 +46,12 @@ def project do
   ...
 end
 ```
-Run:
-```sh
-MIX_ENV=test mix espec.init
-```
-The task creates `spec/spec_helper.exs` file.
+
 Run:
 ```sh
 MIX_ENV=test mix espec_phoenix.init
 ```
-The task creates `phoenix_helper.exs`, `espec_phoenix_extend.ex` and patches `spec/spec_helper.exs`.
+The task creates `spec/spec_helper.exs`, `phoenix_helper.exs` and `espec_phoenix_extend.ex`.
 
 Also you need to checkout your `Ecto` sandbox mode before each example and checkin it after. So `spec_helper.exs` should look like:
 ```elixir
