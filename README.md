@@ -46,23 +46,13 @@ def project do
   ...
 end
 ```
-Run:
-```sh
-MIX_ENV=test mix espec.init
-```
-The task creates `spec/spec_helper.exs` file.
+
 Run:
 ```sh
 MIX_ENV=test mix espec_phoenix.init
 ```
-The task creates `phoenix_helper.exs` and `espec_phoenix_extend.ex`.
+The task creates `spec/spec_helper.exs`, `phoenix_helper.exs` and `espec_phoenix_extend.ex`.
 
-`phoenix_helper.exs` has Phoenix related configurations.
-
-You must require this helper in your `spec_helper.exs`:
-```elixir
-Code.require_file("spec/phoenix_helper.exs")
-```
 Also you need to checkout your `Ecto` sandbox mode before each example and checkin it after. So `spec_helper.exs` should look like:
 ```elixir
 #require phoenix_helper.exs
