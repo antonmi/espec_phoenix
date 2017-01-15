@@ -24,7 +24,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
     app = Mix.Phoenix.base
     create_files(app)
-    patch_espec_config
+    patch_espec_config()
   end
 
   defp create_files(app) do
@@ -33,7 +33,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   end
 
   defp patch_espec_config do
-    append_to Path.join(@spec_folder, @espec_helper), espec_helper_patch_text
+    append_to Path.join(@spec_folder, @espec_helper), espec_helper_patch_text()
   end
 
   defp append_to(filepath, contents) do
