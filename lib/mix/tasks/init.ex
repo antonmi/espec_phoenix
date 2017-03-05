@@ -15,18 +15,34 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   """
 
   @spec_folder "spec"
+  @espec_helper "spec_helper.exs"
   @phoenix_helper "phoenix_helper.exs"
   @espec_phoenix_extend "espec_phoenix_extend.ex"
 
   def run(_args) do
+    Mix.Tasks.Espec.Init.run([])
+
     app = Mix.Phoenix.base
     create_files(app)
+    patch_espec_config()
   end
 
   defp create_files(app) do
     create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(app: app))
     create_file(Path.join(@spec_folder, @espec_phoenix_extend), espec_phoenix_extend_template(app: app))
   end
+
+  defp patch_espec_config do
+    append_to Path.join(@spec_folder, @espec_helper), espec_helper_patch_text()
+  end
+
+  defp append_to(filepath, contents) do
+    File.write!(filepath, File.read!(filepath) <> contents)
+  end
+
+  embed_text :espec_helper_patch, """
+  Code.require_file("spec/phoenix_helper.exs")
+  """
 
   embed_template :phoenix_helper, """
   Code.require_file("spec/espec_phoenix_extend.ex")
