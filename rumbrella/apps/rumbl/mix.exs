@@ -46,7 +46,7 @@ defmodule Rumbl.Mixfile do
      {:comeonin, "~> 2.5"},
      {:cowboy, "~> 1.0"},
      {:info_sys, in_umbrella: true},
-     {:espec_phoenix, "~> 0.6.5", path: "../../..", only: :test, app: false}
+     {:espec_phoenix, "0.6.6", path: "../../..", only: :test, app: false}
       ]
   end
 
