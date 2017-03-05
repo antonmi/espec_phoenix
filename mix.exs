@@ -20,9 +20,7 @@ defmodule EspecPhoenix.Mixfile do
   end
 
   defp description do
-    """
-      ESpec for Phoenix web framework.
-    """
+    "ESpec for Phoenix web framework."
   end
 
   defp deps do
