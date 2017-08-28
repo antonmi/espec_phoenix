@@ -35,16 +35,16 @@ defmodule Rumbl.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.0"},
+    [{:phoenix, "1.3.0"},
      {:phoenix_pubsub, "~> 1.0"},
-     {:ecto, "2.0.5"},
-     {:phoenix_ecto, "~> 3.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:comeonin, "~> 2.5"},
-     {:cowboy, "~> 1.0"},
+     {:ecto, "2.1.6"},
+     {:phoenix_ecto, "3.2.3"},
+     {:postgrex, "0.13.3"},
+     {:phoenix_html, "2.10.3"},
+     {:phoenix_live_reload, "1.0.8", only: :dev},
+     {:gettext, "0.13.1"},
+     {:comeonin, "3.2.0"},
+     {:cowboy, "1.1.2"},
      {:info_sys, in_umbrella: true},
      {:espec_phoenix, path: "../../..", only: :test, app: false}
       ]

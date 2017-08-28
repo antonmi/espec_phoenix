@@ -31,7 +31,7 @@ defmodule Rumbl.UserSpec do
       end
 
       it "has error" do
-        error = {:password, {"should be at least %{count} character(s)", count: 6}}
+        error = {:password, {"should be at least %{count} character(s)", [count: 6, validation: :length, min: 6]}}
         expect(changeset().errors).to have(error)
       end
     end
