@@ -26,8 +26,7 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, ">= 1.4.5"},
-      {:phoenix, "1.3.0"},
-
+      {:phoenix, "~> 1.3.0"},
       {:ecto, ">= 2.0.0", only: [:dev, :test]},
       {:ex_doc, "0.16.2", only: :dev},
       {:credo, "0.8.4", only: :dev},
