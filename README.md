@@ -206,7 +206,7 @@ defmodule Rumbl.VideoControllerSpec do
 end
 ```
 Please note that due to the fact it's integraton tests, you can actually use it without specifying controller:
-```
+```elixir
 defmodule Rumbl.VideoControllerRequestSpec do
   use ESpec.Phoenix, controller: true
 
