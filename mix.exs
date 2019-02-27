@@ -26,9 +26,10 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, ">= 1.6.0"},
-      {:phoenix, "~> 1.3"},
-      {:ecto, ">= 2.0.0", only: [:dev, :test]},
+      {:phoenix, "~> 1.4"},
+      {:ecto, ">= 2.1.6", only: [:dev, :test]},
       {:ex_doc, "~> 0.16", only: :dev},
+      {:poison, "3.1.0"},
       {:credo, "~> 0.8", only: :dev},
     ]
   end
