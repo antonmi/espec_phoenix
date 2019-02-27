@@ -73,7 +73,7 @@ defmodule ESpecPhoenixInitSpec do
 
     it "sets @endpoint" do
       expect(content())
-      |> to(have "@endpoint EspecPhoenix.Endpoint")
+      |> to(have "@endpoint EspecPhoenixWeb.Endpoint")
     end
   end
 end
