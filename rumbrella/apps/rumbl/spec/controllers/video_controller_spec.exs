@@ -31,15 +31,15 @@ defmodule Rumbl.VideoControllerTest do
     end
 
     it "lists all user's videos on index" do
-      expect(html_response(response(), 200)).to match(~r/Listing videos/)
+      html_response(response(), 200) |> should(match(~r/Listing videos/))
     end
 
     it "has user_video title" do
-      expect(response().resp_body).to have(user_video().title)
+      response().resp_body |> should(have(user_video().title))
     end
 
     it "does not have other_video title" do
-      expect(response().resp_body).not_to have(other_video().title)
+      response().resp_body |> should_not(have(other_video().title))
     end
   end
 
@@ -48,7 +48,7 @@ defmodule Rumbl.VideoControllerTest do
     let :current_user, do: conn().assigns.current_user
 
     it "assigns current_user in conn" do
-      expect(current_user().username).to eq("max")
+      current_user().username |> should(eq "max")
     end
 
     describe "POST /videos" do
@@ -59,11 +59,11 @@ defmodule Rumbl.VideoControllerTest do
         let! :response, do: post(conn(), video_path(conn(), :create), video: attrs())
 
         it "creates video" do
-          expect(Repo.get_by!(Video, attrs()).user_id).to eq(current_user().id)
+          Repo.get_by!(Video, attrs()).user_id |> should(eq current_user().id)
         end
 
         it "redirects to index" do
-          expect(redirected_to(response())).to eq(video_path(response(), :index))
+          redirected_to(response()) |> should(eq video_path(response(), :index))
         end
       end
 
@@ -73,12 +73,12 @@ defmodule Rumbl.VideoControllerTest do
 
         it "does not create video" do
           make_post = fn -> post(conn(), video_path(conn(), :create), video: attrs()) end
-          expect(make_post).not_to change(video_count())
+          make_post |> should_not(change(video_count()))
         end
 
         it "shows errors" do
           conn = post(conn(), video_path(conn(), :create), video: attrs())
-          expect(html_response(conn, 200)).to match("check the errors")
+          html_response(conn, 200) |> should(match "check the errors")
         end
       end
     end

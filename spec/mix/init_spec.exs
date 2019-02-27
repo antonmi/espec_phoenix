@@ -23,7 +23,7 @@ defmodule ESpecPhoenixInitSpec do
     let :file, do: "spec/phoenix_helper.exs"
 
     it "check files" do
-      expect(File.regular?(Path.join(@tmp_path, file()))).to be_true()
+      File.regular?(Path.join(@tmp_path, file())) |> should(be_true())
     end
 
     it "requires espec_phoenix_extend" do
@@ -43,7 +43,7 @@ defmodule ESpecPhoenixInitSpec do
     before do: Code.require_file(file())
 
     it "check files" do
-      expect(File.regular?(Path.join(@tmp_path, file()))).to be_true()
+      File.regular?(Path.join(@tmp_path, file())) |> should(be_true())
     end
 
     it "defines model section" do

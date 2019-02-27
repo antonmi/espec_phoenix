@@ -11,11 +11,11 @@ defmodule Rumbl.VideoViewSpec do
       render_to_string(Rumbl.VideoView, "index.html", conn: build_conn(), videos: videos())
     end
 
-    it do: expect(content()).to have("Listing videos")
+    it do: content() |> should(have "Listing videos")
 
     it "has video titles" do
       for video <- videos() do
-        expect(content()).to have(video.title)
+        content() |> should(have video.title)
       end
     end
   end
@@ -29,6 +29,6 @@ defmodule Rumbl.VideoViewSpec do
         changeset: changeset, categories: categories)
     end
 
-    it do: expect(content()).to have("New video")
+    it do: content() |> should(have "New video")
   end
 end

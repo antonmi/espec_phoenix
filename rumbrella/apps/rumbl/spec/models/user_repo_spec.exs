@@ -12,7 +12,7 @@ defmodule Rumbl.UserRepoSpec do
       User.changeset(%User{}, attrs)
     end
 
-    it do: expect(Repo.insert(changeset())).to be_error_result()
+    it do: Repo.insert(changeset()) |> should(be_error_result())
 
     context "when name has been already taken" do
       let :new_changeset do
@@ -22,7 +22,7 @@ defmodule Rumbl.UserRepoSpec do
 
       it "has error" do
         error = {:username, {"has already been taken", []}}
-        expect(new_changeset().errors).to have(error)
+        new_changeset().errors |> should(have error)
       end
     end
   end
@@ -39,6 +39,6 @@ defmodule Rumbl.UserRepoSpec do
       from c in query, select: c.name
     end
 
-    it do: expect(Repo.all(query())).to eq(~w(a b c))
+    it do: Repo.all(query()) |> should(eq ~w(a b c))
   end
 end
