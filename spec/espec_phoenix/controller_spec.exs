@@ -32,8 +32,8 @@ defmodule ControllerSpec do
         end
 
         it "call ESpec function" do
-          expect(change(fn -> :ok end)).not_to eq(:ok)
-          expect(change(fn -> :ok end, 2)).not_to eq(:ok)
+          change(fn -> :ok end) |> should_not(eq :ok)
+          change(fn -> :ok end, 2) |> should_not(eq :ok)
         end
       end
     end
