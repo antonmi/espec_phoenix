@@ -61,15 +61,15 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
     def controller do
       quote do
         alias <%= @app %>
-        import <%= @app %>.Router.Helpers
+        import <%= @app %>Web.Router.Helpers
 
-        @endpoint <%= @app %>.Endpoint
+        @endpoint <%= @app %>Web.Endpoint
       end
     end
 
     def view do
       quote do
-        import <%= @app %>.Router.Helpers
+        import <%= @app %>Web.Router.Helpers
       end
     end
 
@@ -77,7 +77,7 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
       quote do
         alias <%= @app %>.Repo
 
-        @endpoint <%= @app %>.Endpoint
+        @endpoint <%= @app %>Web.Endpoint
       end
     end
 
