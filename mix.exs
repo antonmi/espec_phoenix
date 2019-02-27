@@ -7,7 +7,7 @@ defmodule EspecPhoenix.Mixfile do
     [app: :espec_phoenix,
      name: "ESpec Phoenix",
      version: @version,
-     elixir: "~> 1.0",
+     elixir: ">= 1.5.3",
      description: description(),
      package: package(),
      deps: deps(),
@@ -25,7 +25,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, "~> 1.5"},
+      {:espec, ">= 1.6.0"},
       {:phoenix, "~> 1.3"},
       {:ecto, ">= 2.0.0", only: [:dev, :test]},
       {:ex_doc, "~> 0.16", only: :dev},
