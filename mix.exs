@@ -8,7 +8,7 @@ defmodule EspecPhoenix.Mixfile do
       app: :espec_phoenix,
       name: "ESpec Phoenix",
       version: @version,
-      elixir: ">= 1.5.3",
+      elixir: ">= 1.6.0",
       description: description(),
       package: package(),
       deps: deps(),
