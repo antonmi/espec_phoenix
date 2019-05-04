@@ -31,7 +31,7 @@ defmodule EspecPhoenix.Mixfile do
       {:phoenix, "~> 1.4"},
       {:ecto, ">= 2.1.6", only: [:dev, :test]},
       {:ex_doc, "~> 0.16", only: :dev},
-      {:poison, "3.1.0 or ~> 4.0.1"},
+      {:poison, "~> 3.1 or ~> 4.0"},
       {:credo, "~> 0.8", only: :dev}
     ]
   end
