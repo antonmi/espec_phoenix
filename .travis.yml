@@ -3,6 +3,7 @@ elixir:
 - 1.6.6
 - 1.7.0
 - 1.7.2
+- 1.8.1
 otp_release:
 - 19.2
 - 20.0
@@ -11,6 +12,8 @@ matrix:
   exclude:
   - elixir: 1.6.0
     otp_release: 21.0
+  - elixir: 1.8.1
+      otp_release: 19.2
 sudo: false
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
