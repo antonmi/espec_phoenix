@@ -1,6 +1,6 @@
 defmodule Rumbl.Auth do
   import Plug.Conn
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+  import Bcrypt, only: [verify_pass: 2, no_user_verify: 0]
   import Phoenix.Controller
   alias Rumbl.Router.Helpers
 
@@ -32,12 +32,12 @@ defmodule Rumbl.Auth do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(Rumbl.User, username: username)
     cond do
-      user && checkpw(given_pass, user.password_hash) ->
+      user && verify_pass(given_pass, user.password_hash) ->
         {:ok, login(conn, user)}
       user ->
         {:error, :unauthorized, conn}
       true ->
-        dummy_checkpw()
+        no_user_verify()
         {:error, :not_found, conn}
     end
   end

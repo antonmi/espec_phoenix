@@ -5,8 +5,9 @@ defmodule Rumbl do
     import Supervisor.Spec
 
     children = [
-      supervisor(Rumbl.Repo, []),
-      supervisor(Rumbl.Endpoint, []),
+      Rumbl.Repo,
+      Rumbl.Endpoint,
+      {Phoenix.PubSub, [name: Rumbl.PubSub, adapter: Phoenix.PubSub.PG2]}
     ]
 
     opts = [strategy: :one_for_one, name: Rumbl.Supervisor]
