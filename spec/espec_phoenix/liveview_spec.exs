@@ -1,8 +1,8 @@
-defmodule ControllerSpec do
-  use ESpec.Phoenix, controller: SomeController
+defmodule LiveViewSpec do
+  use ESpec.Phoenix, live_view: SomeLiveView, pid: self()
 
   it "sets @model" do
-    expect(@controller) |> to(eq(SomeController))
+    expect(@live_view) |> to(eq(SomeLiveView))
   end
 
   describe "imports" do
@@ -57,13 +57,10 @@ defmodule ControllerSpec do
         get_flash(:test) |> should(eq(:test))
       end
 
-      context "build_conn/0" do
-        before do
-          allow(Phoenix.ConnTest) |> to(accept(:build_conn, fn -> :ok end))
-        end
+      context "live_conn/0" do
 
-        it "call Phoenix.ConnTest.build_conn" do
-          build_conn() |> should(eq(:ok))
+        it "call live_conn()" do
+          live_conn().assigns |> should(eq(%{}))
         end
       end
     end
@@ -80,8 +77,8 @@ defmodule ControllerSpec do
   end
 
   describe "imports from ESpec.Phoenix.Extend" do
-    it "calls function from ModelHelpers" do
-      controller_helper_fun() |> to(eq(:fun))
+    it "calls function from LiveViewHelpers" do
+      liveview_helper_fun() |> to(eq(:fun))
     end
   end
 end
