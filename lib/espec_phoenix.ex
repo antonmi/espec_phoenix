@@ -43,7 +43,7 @@ defmodule ESpec.Phoenix do
           use ESpec, unquote(args)
           @channel Keyword.get(unquote(args), :channel)
 
-          use Phoenix.ChannelTest
+          import Phoenix.ChannelTest
           use ESpec.Phoenix.ModelHelpers
 
           use ESpec.Phoenix.Extend, :channel
