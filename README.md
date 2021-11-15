@@ -19,6 +19,7 @@ There is [rumbrella](https://github.com/antonmi/espec_phoenix/tree/master/rumbre
 - [Controller specs](#controller-specs)
 - [View specs](#view-specs)
 - [Channel specs](#channel-specs)
+- [LiveView specs](#liveview-specs)
 - [Extensions](#extensions)
 - [Contributing](#contributing)
 
