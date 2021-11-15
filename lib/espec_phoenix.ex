@@ -43,10 +43,21 @@ defmodule ESpec.Phoenix do
           use ESpec, unquote(args)
           @channel Keyword.get(unquote(args), :channel)
 
-          use Phoenix.ChannelTest
+          import Phoenix.ChannelTest
           use ESpec.Phoenix.ModelHelpers
 
           use ESpec.Phoenix.Extend, :channel
+        end
+
+      Keyword.has_key?(args, :live_view) ->
+        quote do
+          use ESpec, unquote(args)
+          @live_view Keyword.get(unquote(args), :live_view)
+
+          import Phoenix.LiveViewTest
+          use ESpec.Phoenix.ModelHelpers
+          use ESpec.Phoenix.LiveViewHelpers, unquote(args)
+          use ESpec.Phoenix.Extend, :live_view
         end
 
       true ->
@@ -79,6 +90,23 @@ defmodule ESpec.Phoenix do
         import Phoenix.ConnTest, except: [conn: 0, build_conn: 0]
 
         def build_conn, do: Phoenix.ConnTest.build_conn()
+      end
+    end
+  end
+
+  defmodule LiveViewHelpers do
+    @moduledoc false
+
+    defmacro __using__(args) do
+      quote do
+        import Plug.Conn
+        import Phoenix.ConnTest, except: [conn: 0, build_conn: 0]
+
+        def live_conn do
+          ExUnit.OnExitHandler.start_link([])
+          ExUnit.OnExitHandler.register(Keyword.get(unquote(args), :pid))
+          Phoenix.ConnTest.build_conn()
+        end
       end
     end
   end

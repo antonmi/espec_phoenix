@@ -21,8 +21,10 @@ defmodule Rumbl.UserRepoSpec do
       end
 
       it "has error" do
-        error = {:username, {"has already been taken", []}}
-        new_changeset().errors |> should(have error)
+        error = [
+          username: {"has already been taken", [constraint: :unique, constraint_name: "users_username_index"]}
+        ]
+        new_changeset().errors |> should(be error)
       end
     end
   end

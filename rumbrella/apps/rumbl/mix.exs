@@ -23,8 +23,6 @@ defmodule Rumbl.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Rumbl, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :info_sys],
      extra_applications: [:ex_unit]]
   end
 
@@ -36,19 +34,21 @@ defmodule Rumbl.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "1.4.1"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:ecto, "2.1.6"},
-     {:phoenix_ecto, "3.2.3"},
-     {:postgrex, "0.13.3"},
-     {:phoenix_html, "2.10.3"},
-     {:phoenix_live_reload, "1.0.8", only: :dev},
+    [{:phoenix, "~> 1.6.2"},
+     {:phoenix_pubsub, "~> 2.0"},
+     {:ecto, "3.7.1"},
+     {:ecto_sql, "3.7.1"},
+     {:phoenix_ecto, "4.4.0"},
+     {:postgrex, "0.15.13"},
+     {:phoenix_html, "3.1.0"},
+     {:phoenix_live_reload, "1.3.3", only: :dev},
      {:poison, "3.1.0"},
+     {:jason, "~> 1.0"},
      {:gettext, "0.13.1"},
-     {:comeonin, "3.2.0"},
-     {:cowboy, "1.1.2"},
+     {:cowboy, "2.9.0"},
      {:info_sys, in_umbrella: true},
-     {:espec_phoenix, path: "../../..", only: :test, app: false}
+     {:espec_phoenix, path: "../../..", only: :test, app: false},
+     {:bcrypt_elixir, "~> 2.3"}
       ]
   end
 
@@ -61,6 +61,6 @@ defmodule Rumbl.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     test: ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

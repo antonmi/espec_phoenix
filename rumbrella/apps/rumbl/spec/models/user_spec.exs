@@ -31,8 +31,8 @@ defmodule Rumbl.UserSpec do
       end
 
       it "has error" do
-        error = {:password, {"should be at least %{count} character(s)", [count: 6, validation: :length, min: 6]}}
-        changeset().errors |> should(have error)
+        error = [password: {"should be at least %{count} character(s)", [count: 6, validation: :length, kind: :min, type: :string]}]
+        changeset().errors |> should(be error)
       end
     end
 
@@ -48,7 +48,7 @@ defmodule Rumbl.UserSpec do
 
       it do: assert changeset().valid?
       it do: assert shared[:password]
-      it do: assert Comeonin.Bcrypt.checkpw(shared[:password], shared[:password_hash])
+      it do: assert Bcrypt.verify_pass(shared[:password], shared[:password_hash])
     end
   end
 end

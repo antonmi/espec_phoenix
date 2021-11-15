@@ -15,6 +15,10 @@ defmodule ESpec.Phoenix.Extend do
     def channel_helper_fun, do: :fun
   end
 
+  defmodule LiveViewHelpers do
+    def liveview_helper_fun, do: :fun
+  end
+
   def model do
     quote do
       import ModelHelpers
@@ -36,6 +40,12 @@ defmodule ESpec.Phoenix.Extend do
   def channel do
     quote do
       import ChannelHelpers
+    end
+  end
+
+  def live_view do
+    quote do
+      import LiveViewHelpers
     end
   end
 

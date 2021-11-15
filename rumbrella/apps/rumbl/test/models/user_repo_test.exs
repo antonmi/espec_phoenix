@@ -11,7 +11,7 @@ defmodule Rumbl.UserRepoTest do
     changeset = User.changeset(%User{}, attrs)
 
     assert {:error, changeset} = Repo.insert(changeset)
-    assert {:username, {"has already been taken", []}} in changeset.errors
+    assert [username: {"has already been taken", [constraint: :unique, constraint_name: "users_username_index"]}] == changeset.errors
   end
 
   test "alphabetical/1 orders by name" do
