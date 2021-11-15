@@ -292,6 +292,30 @@ defmodule Rumbl.Channels.VideoChannelSpec do
   it do: assert %{annotations: [%{body: "one"}, %{body: "two"}]} = shared[:reply]
 end
 ```
+## LiveView specs
+```elixir
+use ESpec.Phoenix, live_view: YourLiveView, async: false, pid: self()
+```
+LiveView specs uses `Phoenix.LiveViewTest` and `ESpec.Phoenix.ModelsHelpers`.
+Use 'model' tag to identify model specs:
+### Example
+```elixir
+defmodule LiveViewEspecWeb.AccountsLiveSpec do
+  use ESpec.Phoenix, live_view: LiveViewEspecWeb.UserLive.Index, async: false, pid: self()
+
+
+  describe "GET /accounts" do
+    it "displays the page" do
+      {:ok, page_live, disconnected_html} = live(live_conn(), "/live/accounts")
+      expect disconnected_html |> to(match "Listing Users")
+      expect render(page_live) |> to(match "Listing Users")
+    end
+  end
+end
+```
+
+[live_view_espec repo](https://github.com/karlosmid/live_view_espec)
+
 ## Extensions
 [espec_phoenix_helpers](https://github.com/facto/espec_phoenix_helpers) - assertions and helpers that used to be part of this project but were extracted out
 [test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
