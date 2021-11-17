@@ -28,12 +28,12 @@ defmodule EspecPhoenix.Mixfile do
   defp deps do
     [
       {:espec, ">= 1.8.0"},
-      {:phoenix, "~> 1.6.2"},
-      {:phoenix_live_view, "~> 0.16.0"},
+      {:phoenix, "~> 1.6"},
+      {:phoenix_live_view, "~> 0.16"},
       {:ecto, ">= 2.1.6", only: [:dev, :test]},
-      {:ex_doc, "~> 0.19.3", only: :dev},
+      {:ex_doc, "~> 0.25", only: :dev},
       {:poison, "~> 3.1 or ~> 4.0"},
-      {:credo, "~> 0.8", only: :dev}
+      {:credo, "~> 1.6", only: :dev}
     ]
   end
 

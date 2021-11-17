@@ -58,7 +58,6 @@ defmodule LiveViewSpec do
       end
 
       context "live_conn/0" do
-
         it "call live_conn()" do
           live_conn().assigns |> should(eq(%{}))
         end
