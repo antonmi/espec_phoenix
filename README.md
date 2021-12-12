@@ -1,6 +1,11 @@
 # ESpec.Phoenix
+
 [![Build Status](https://travis-ci.org/antonmi/espec_phoenix.svg?branch=master)](https://travis-ci.org/antonmi/espec_phoenix)
-[![Hex.pm](https://img.shields.io/hexpm/v/espec_phoenix.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
+[![Module Version](https://img.shields.io/hexpm/v/espec_phoenix.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg?style=flat-square)](https://hexdocs.pm/espec_phoenix/)
+[![Total Download](https://img.shields.io/hexpm/dt/espec_phoenix.svg?style=flat-square)](https://hex.pm/packages/espec_phoenix)
+[![License](https://img.shields.io/hexpm/l/espec_phoenix.svg?style=flat-square)](https://github.com/antonmi/espec_phoenix/blob/master/LICENSE.md)
+[![Last Updated](https://img.shields.io/github/last-commit/antonmi/espec_phoenix.svg?style=flat-square)](https://github.com/antonmi/espec_phoenix/commits/master)
 
 ##### ESpec helpers for Phoenix web framework.
 
@@ -10,7 +15,7 @@ ESpec.Phoenix is a lightweight wrapper around ESpec which brings BDD to Phoenix 
 
 Use ESpec.Phoenix the same way as ExUnit in you Phoenix application.
 
-There is [rumbrella](https://github.com/antonmi/espec_phoenix/tree/master/rumbrella) project from great [Programming Phoenix](https://pragprog.com/book/phoenix/programming-phoenix) book. One can find a lot of usefull examples there!
+There is [rumbrella](https://github.com/antonmi/espec_phoenix/tree/master/rumbrella) project from great [Programming Phoenix](https://pragprog.com/book/phoenix/programming-phoenix) book. One can find a lot of useful examples there!
 
 ## Contents
 - [Installation](#installation)
@@ -25,7 +30,7 @@ There is [rumbrella](https://github.com/antonmi/espec_phoenix/tree/master/rumbre
 
 ## Installation
 
-Add `espec_phoenix` to dependencies in the `mix.exs` file:
+Add `:espec_phoenix` to dependencies in the `mix.exs` file:
 
 ```elixir
 def deps do
@@ -35,10 +40,12 @@ def deps do
   ...
 end
 ```
+
 ```sh
-mix deps.get
+$ mix deps.get
 ```
-Set `preferred_cli_env` for `espec` in the `mix.exs` file:
+
+Set `:preferred_cli_env` for `:espec` in the `mix.exs` file:
 
 ```elixir
 def project do
@@ -49,12 +56,15 @@ end
 ```
 
 Run:
+
 ```sh
-MIX_ENV=test mix espec_phoenix.init
+$ MIX_ENV=test mix espec_phoenix.init
 ```
+
 The task creates `spec/spec_helper.exs`, `phoenix_helper.exs` and `espec_phoenix_extend.ex`.
 
 Also you need to checkout your `Ecto` sandbox mode before each example and checkin it after. So `spec_helper.exs` should look like:
+
 ```elixir
 #require phoenix_helper.exs
 Code.require_file("#{__DIR__}/phoenix_helper.exs")
@@ -79,15 +89,18 @@ The reason is to make specs more explicit like people used to see using ExUnit.
 
 If you still want to use them, check out the [espec_phoenix_helpers](https://github.com/facto/espec_phoenix_helpers) project.
 
-
-
 ## Model specs
+
 Use 'model' tag to identify model specs:
+
 ```elixir
 use ESpec.Phoenix, model: YourModel
 ```
+
 What ESpec.Phoenix does behind the scene is the following:
-1. Uses `ModelHelpers`.
+
+Uses `ModelHelpers`:
+
 ```elixir
 defmodule ModelHelpers do
   defmacro __using__(_args) do
@@ -99,11 +112,13 @@ defmodule ModelHelpers do
   end
 end
 ```
-2. Calls `ESpec.Phoenix.Extend.model` function extending your spec module.
+
+Calls `ESpec.Phoenix.Extend.model` function extending your spec module.
 
 #### Note! We don't import `change/1` and `change/2` functions from `Ecto.Changeset` because they conflicts with ESpec functions. If you want to use them, call them directly with module prefix (`Ecto.Changeset.change`).
 
 ### Model spec example:
+
 ```elixir
 defmodule Rumbl.UserSpec do
   use ESpec.Phoenix, model: User, async: true
@@ -126,7 +141,9 @@ defmodule Rumbl.UserSpec do
   end
 end
 ```
+
 It is a good practice to place specs with side effects (db access) to another module:
+
 ```elixir
 defmodule Rumbl.UserRepoSpec do
   use ESpec.Phoenix, model: User, async: true
@@ -157,13 +174,19 @@ defmodule Rumbl.UserRepoSpec do
   end
 end
 ```
+
 ## Controller specs
+
 Controller specs are integration tests that tests interactions among all parts of your application.
+
 Use 'controller' tag to identify controller specs:
+
 ```elixir
 use ESpec.Phoenix, controller: YourController
 ```
+
 Your module will be extended with `ESpec.Phoenix.ModelHelpers` and also with `ESpec.Phoenix.ControllerHelpers`:
+
 ```elixir
 defmodule ControllerHelpers do
   defmacro __using__(_args) do
@@ -176,8 +199,11 @@ defmodule ControllerHelpers do
   end
 end
 ```
+
 #### Note! Deprecated Phoenix.ConnTest.conn/0 function is not imported.
+
 Below is an example of controller specs:
+
 ```elixir
 defmodule Rumbl.VideoControllerSpec do
   use ESpec.Phoenix, controller: VideoController, async: true
@@ -206,7 +232,9 @@ defmodule Rumbl.VideoControllerSpec do
   end
 end
 ```
+
 Please note that due to the fact it's integraton tests, you can actually use it without specifying controller:
+
 ```elixir
 defmodule Rumbl.VideoControllerRequestSpec do
   use ESpec.Phoenix, controller: true
@@ -224,9 +252,13 @@ defmodule Rumbl.VideoControllerRequestSpec do
   end
 end
 ```
+
 ## View specs
+
 View specs also are extended with `ESpec.Phoenix.ControllerHelpers` and also imports `Phoenix.View`.
+
 ### Example
+
 ```elixir
 defmodule Rumbl.VideoViewSpec do
   use ESpec.Phoenix, async: true, view: VideoView
@@ -251,13 +283,18 @@ defmodule Rumbl.VideoViewSpec do
   end
 end
 ```
+
 ## Channel specs
+
 ```elixir
 use ESpec.Phoenix, channel: YourChannel
 ```
+
 Channel specs uses `Phoenix.ChannelTest` and `ESpec.Phoenix.ModelsHelpers`.
 Use 'model' tag to identify model specs:
+
 ### Example
+
 ```elixir
 defmodule Rumbl.Channels.VideoChannelSpec do
   use ESpec.Phoenix, channel: Rumbl.VideoChannel
@@ -293,17 +330,21 @@ defmodule Rumbl.Channels.VideoChannelSpec do
   it do: assert %{annotations: [%{body: "one"}, %{body: "two"}]} = shared[:reply]
 end
 ```
+
 ## LiveView specs
+
 ```elixir
 use ESpec.Phoenix, live_view: YourLiveView, async: false, pid: self()
 ```
+
 LiveView specs uses `Phoenix.LiveViewTest` and `ESpec.Phoenix.ModelsHelpers`.
 Use 'model' tag to identify model specs:
+
 ### Example
+
 ```elixir
 defmodule LiveViewEspecWeb.AccountsLiveSpec do
   use ESpec.Phoenix, live_view: LiveViewEspecWeb.UserLive.Index, async: false, pid: self()
-
 
   describe "GET /accounts" do
     it "displays the page" do
@@ -318,10 +359,12 @@ end
 [live_view_espec repo](https://github.com/karlosmid/live_view_espec)
 
 ## Extensions
+
 [espec_phoenix_helpers](https://github.com/facto/espec_phoenix_helpers) - assertions and helpers that used to be part of this project but were extracted out
 [test_that_json_espec](https://github.com/facto/test_that_json_espec) - matchers for testing JSON
 
 ## Contributing
+
 ##### Contributions are welcome and appreciated!
 
 Request a new feature by creating an issue.
@@ -329,10 +372,19 @@ Request a new feature by creating an issue.
 Create a pull request with new features or fixes.
 
 To run specs:
+
 ```sh
-mix espec
+$ mix espec
 ```
+
 There is a [rumbl application](https://github.com/antonmi/espec_phoenix/tree/master/rumbl) with specs inside.
 Run `mix deps.get` in `rumbl` folder.
 Change database settings in `test_app/config/test.exs`.
 Run tests with `mix test` and `mix espec`.
+
+## Copyright and License
+
+Copyright (c) 2015 Anton Mishchuk
+
+This work is free. You can redistribute it and/or modify it under the
+terms of the MIT License. See the [LICENSE.md](./LICENSE.md) file for more details.
