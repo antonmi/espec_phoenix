@@ -87,10 +87,10 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
     def live_view do
       quote do
-        alias LiveViewEspec
-        import LiveViewEspecWeb.Router.Helpers
+        alias <%= @app %>
+        import <%= @app %>Web.Router.Helpers
 
-        @endpoint LiveViewEspecWeb.Endpoint
+        @endpoint <%= @app %>Web.Endpoint
       end
     end
 
