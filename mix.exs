@@ -2,14 +2,14 @@ defmodule EspecPhoenix.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/antonmi/espec_phoenix"
-  @version "0.8.0"
+  @version "0.8.1"
 
   def project do
     [
       app: :espec_phoenix,
       name: "ESpec Phoenix",
       version: @version,
-      elixir: ">= 1.6.0",
+      elixir: ">= 1.10.0",
       package: package(),
       deps: deps(),
       docs: docs(),
@@ -28,10 +28,10 @@ defmodule EspecPhoenix.Mixfile do
     [
       {:espec, ">= 1.8.0"},
       {:phoenix, "~> 1.6"},
-      {:phoenix_live_view, "~> 0.16"},
+      {:phoenix_live_view, "~> 0.17"},
       {:ecto, ">= 2.1.6", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :docs, runtime: false},
-      {:poison, "~> 3.1 or ~> 4.0"},
+      {:poison, "~> 5.0"},
       {:credo, "~> 1.6", only: :dev}
     ]
   end
