@@ -12,9 +12,7 @@ defmodule EspecPhoenix.Mixfile do
       elixir: ">= 1.10.0",
       package: package(),
       deps: deps(),
-      docs: docs(),
       preferred_cli_env: [
-        docs: :docs,
         espec: :test
       ]
     ]
@@ -43,19 +41,6 @@ defmodule EspecPhoenix.Mixfile do
       maintainers: ["Anton Mishchuk"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
-    ]
-  end
-
-  defp docs do
-    [
-      extras: [
-        "LICENSE.md": [title: "License"],
-        "README.md": [title: "Overview"]
-      ],
-      main: "readme",
-      source_url: @source_url,
-      source_ref: "v#{@version}",
-      formatters: ["html"]
     ]
   end
 end
