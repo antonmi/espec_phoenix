@@ -2,7 +2,7 @@ defmodule EspecPhoenix.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/antonmi/espec_phoenix"
-  @version "0.8.1"
+  @version "0.8.2"
 
   def project do
     [
