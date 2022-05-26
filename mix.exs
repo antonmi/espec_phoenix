@@ -28,7 +28,7 @@ defmodule EspecPhoenix.Mixfile do
       {:phoenix, "~> 1.6"},
       {:phoenix_live_view, "~> 0.17"},
       {:ecto, ">= 2.1.6", only: [:dev, :test]},
-      {:ex_doc, ">= 0.0.0", only: :docs, runtime: false},
+      {:ex_doc, "~> 0.28", only: [:docs, :dev]},
       {:poison, "~> 5.0"},
       {:credo, "~> 1.6", only: :dev}
     ]
