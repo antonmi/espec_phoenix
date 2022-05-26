@@ -27,10 +27,6 @@ jobs:
         restore-keys: ${{ runner.os }}-mix-
     - name: Install dependencies
       run: mix deps.get
-    - name: Run tests
-      run: mix test
-    - name: Run tests with espec
+    - name: Run espec tests
       run: mix espec
-    - name: Run formatters
-      run: mix espec spec_formatters/test_spec.exs
 
