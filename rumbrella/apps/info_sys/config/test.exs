@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :info_sys, :wolfram,
   app_id: "1234",
