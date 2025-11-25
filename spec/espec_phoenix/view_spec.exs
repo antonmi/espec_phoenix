@@ -6,44 +6,20 @@ defmodule ViewSpec do
   end
 
   describe "imports" do
-    context "imports functions from Phoenix.View" do
-      before do
-        allow(Phoenix.View) |> to(accept(:render, fn a, b, c -> a + b + c end))
-      end
-
-      it "call Ecto function" do
-        render(1, 2, 3) |> should(eq(6))
-      end
+    it "call Phoenix.View function" do
+      template_path_to_name(
+        "lib/templates/admin/users/show.html.eex",
+        "lib/templates"
+      )
+      |> should(eq("admin/users/show.html"))
     end
 
-    context "imports functions from Phoenix.ConnTest" do
-      before do
-        allow(Phoenix.ConnTest) |> to(accept(:get_flash, fn a -> a end))
-      end
-
-      it "call Phoenix.ConnTest function" do
-        get_flash(:test) |> should(eq(:test))
-      end
-
-      context "build_conn/0" do
-        before do
-          allow(Phoenix.ConnTest) |> to(accept(:build_conn, fn -> :ok end))
-        end
-
-        it "call Phoenix.ConnTest.build_conn" do
-          build_conn() |> should(eq(:ok))
-        end
-      end
+    it "call Phoenix.ConnTest.build_conn" do
+      build_conn() |> should(be_struct(Plug.Conn))
     end
 
-    context "imports functions from Plug.Conn" do
-      before do
-        allow(Plug.Conn) |> to(accept(:clear_session, fn a -> a end))
-      end
-
-      it "call Plug.Conn function" do
-        clear_session(:test) |> should(eq(:test))
-      end
+    it "call Plug.Conn function" do
+      assign(build_conn(), :a, 1).assigns |> should(eq(%{a: 1}))
     end
   end
 

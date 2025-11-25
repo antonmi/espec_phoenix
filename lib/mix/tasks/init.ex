@@ -20,14 +20,19 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
   @espec_phoenix_extend "espec_phoenix_extend.ex"
 
   def run(_args) do
-    Mix.Tasks.Espec.Init.run([])
+    create_espec_files()
 
     app = Mix.Phoenix.base()
-    create_files(app)
+    create_espec_phoenix_files(app)
     patch_espec_config()
   end
 
-  defp create_files(app) do
+  defp create_espec_files do
+    create_directory(@spec_folder)
+    create_file(Path.join(@spec_folder, @espec_helper), spec_helper_template(nil))
+  end
+
+  defp create_espec_phoenix_files(app) do
     create_file(Path.join(@spec_folder, @phoenix_helper), phoenix_helper_template(app: app))
 
     create_file(
@@ -46,6 +51,26 @@ defmodule Mix.Tasks.EspecPhoenix.Init do
 
   embed_text(:espec_helper_patch, """
   Code.require_file("spec/phoenix_helper.exs")
+  """)
+
+  embed_template(:spec_helper, """
+  ESpec.configure fn(config) ->
+    config.before fn(tags) ->
+      {:shared, hello: :world, tags: tags}
+    end
+
+    config.finally fn(_shared) ->
+      :ok
+    end
+  end
+  """)
+
+  embed_template(:shared_spec_example, """
+  defmodule ExampleSharedSpec do
+    use ESpec, shared: true
+
+    # This shared spec will always be included!
+  end
   """)
 
   embed_template(:phoenix_helper, """

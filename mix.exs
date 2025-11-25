@@ -2,35 +2,34 @@ defmodule EspecPhoenix.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/antonmi/espec_phoenix"
-  @version "0.8.2"
+  @version "0.9.0"
 
   def project do
     [
       app: :espec_phoenix,
       name: "ESpec Phoenix",
       version: @version,
-      elixir: ">= 1.10.0",
+      elixir: ">= 1.16.0",
       package: package(),
       deps: deps(),
-      preferred_cli_env: [
-        espec: :test
-      ]
+      source_url: @source_url,
+      preferred_cli_env: [espec: :test]
     ]
   end
 
   def application do
-    [applications: [:logger, :phoenix]]
+    [applications: [:logger, :phoenix, :ecto, :espec, :phoenix_live_view]]
   end
 
   defp deps do
     [
-      {:espec, ">= 1.8.0"},
-      {:phoenix, "~> 1.6"},
-      {:phoenix_live_view, "~> 0.17"},
-      {:ecto, ">= 2.1.6", only: [:dev, :test]},
-      {:ex_doc, "~> 0.28", only: [:docs, :dev]},
-      {:poison, "~> 5.0"},
-      {:credo, "~> 1.6", only: :dev}
+      {:espec, path: "/Users/anton.mishchukkloeckner.com/elixir/espec"},
+      {:phoenix, "~> 1.8"},
+      {:phoenix_view, "~> 2.0"},
+      {:phoenix_live_view, "~> 1.1"},
+      {:ecto, "~> 3.13", only: [:dev, :test]},
+      {:ex_doc, "~> 0.39", only: [:docs, :dev]},
+      {:credo, "~> 1.7", only: :dev}
     ]
   end
 
