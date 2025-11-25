@@ -8,33 +8,36 @@ on:
 
 jobs:
   build:
-
     name: Build and test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pair:
+          - otp-version: '25.1.2'
+            elixir-version: '1.15.7'
+          - otp-version: '26.0'
+            elixir-version: '1.16.0'
+          - otp-version: '27.3.3'
+            elixir-version: '1.18.3'
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Elixir
-      uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
-      with:
-        elixir-version: '1.13.4' # Define the elixir version [required]
-        otp-version: '25.0' # Define the OTP version [required]
-    - name: Restore dependencies cache
-      uses: actions/cache@v2
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
-    - name: Run espec tests
-      run: mix espec
-    - name: cd to rumbrella
-      run: cd rumbrella
-    - name: Install rumbrella deps
-      run: mix deps.get
-    - name: Run mix test
-      run: mix test
-    - name: Run mix espec
-      run: mix espec
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Elixir and Erlang
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{matrix.pair.otp-version}}
+          elixir-version: ${{matrix.pair.elixir-version}}
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Run tests with espec
+        run: mix espec
+      - name: cd to rumbrella
+        run: cd rumbrella
+      - name: Install rumbrella deps
+        run: mix deps.get
+      - name: Run mix test
+        run: mix test
+      - name: Run mix espec
+        run: mix espec
 

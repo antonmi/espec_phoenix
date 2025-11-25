@@ -23,7 +23,7 @@ defmodule EspecPhoenix.Mixfile do
 
   defp deps do
     [
-      {:espec, path: "/Users/anton.mishchukkloeckner.com/elixir/espec"},
+      {:espec, "~> 1.10"},
       {:phoenix, "~> 1.8"},
       {:phoenix_view, "~> 2.0"},
       {:phoenix_live_view, "~> 1.1"},
