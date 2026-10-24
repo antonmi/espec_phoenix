@@ -30,12 +30,13 @@ jobs:
         run: mix deps.get
       - name: Run tests with espec
         run: mix espec
-      - name: cd to rumbrella
-        run: cd rumbrella
       - name: Install rumbrella deps
+        working-directory: ./rumbrella
         run: mix deps.get
       - name: Run mix test
+        working-directory: ./rumbrella
         run: mix test
       - name: Run mix espec
+        working-directory: ./rumbrella
         run: mix espec
 
